@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Penny - Smart Expense Tracking & Bill Splitting</title>
+  <style>
+    :root {
+      --bg: #0C0C10;
+      --card-bg: #15151D;
+      --primary: #7C6FF7;
+      --accent: #00D68F;
+      --text: #F2F2F7;
+      --text-muted: #9D9DA8;
+      --border: #262633;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 24px;
+      text-align: center;
+    }
+    .logo-img {
+      width: 110px;
+      height: 110px;
+      border-radius: 28px;
+      box-shadow: 0 12px 36px rgba(124, 111, 247, 0.4);
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: 38px;
+      font-weight: 800;
+      margin: 0 0 12px 0;
+      letter-spacing: -0.5px;
+    }
+    p {
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+    .nav-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background: #1C1C26;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.2s;
+    }
+    .nav-btn:hover {
+      border-color: var(--primary);
+      background: rgba(124, 111, 247, 0.1);
+      transform: translateY(-2px);
+    }
+    .nav-btn span {
+      color: var(--primary);
+    }
+    .footer {
+      margin-top: 40px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="penny_logo.jpg" alt="Penny Logo" class="logo-img">
+    <h1>Penny Expense Manager</h1>
+    <p>Smart, privacy-first personal finance tracker and group bill splitter with 1-tap UPI settlements.</p>
+
+    <div class="nav-card">
+      <a href="privacy-policy.html" class="nav-btn">
+        Privacy Policy
+        <span>&rarr;</span>
+      </a>
+      <a href="terms.html" class="nav-btn">
+        Terms of Service &amp; User Agreement
+        <span>&rarr;</span>
+      </a>
+      <a href="delete-account.html" class="nav-btn">
+        Account &amp; Data Deletion Request
+        <span>&rarr;</span>
+      </a>
+    </div>
+
+    <div class="footer">
+      &copy; 2026 Penny Expense Manager. All rights reserved.
+    </div>
+  </div>
+</body>
+</html>
