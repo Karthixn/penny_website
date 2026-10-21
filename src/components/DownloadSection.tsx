@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Download, Copy, Check, Shield, Smartphone, Terminal, HelpCircle } from 'lucide-react';
 import { DOWNLOAD_CONFIG, getPrimaryDownloadUrl } from '../data/siteContent';
+import { AnimateOnScroll } from './motion';
 
 export const DownloadSection: React.FC = () => {
   const [copiedHash, setCopiedHash] = useState(false);
@@ -21,7 +22,7 @@ export const DownloadSection: React.FC = () => {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Download Card */}
-        <div className="relative rounded-3xl bg-gradient-to-b from-surface to-[#131520] border border-primary/40 p-8 sm:p-12 shadow-2xl shadow-primary/10">
+        <AnimateOnScroll variant="scale-in" className="relative rounded-3xl bg-gradient-to-b from-surface to-[#131520] border border-primary/40 p-8 sm:p-12 shadow-2xl shadow-primary/10">
           
           <div className="text-center max-w-2xl mx-auto mb-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-primary-light text-xs font-semibold mb-4 border border-primary/30">
@@ -168,7 +169,7 @@ export const DownloadSection: React.FC = () => {
             </p>
           </div>
 
-        </div>
+        </AnimateOnScroll>
 
       </div>
     </section>

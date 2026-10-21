@@ -10,6 +10,7 @@ import {
   ShieldCheck,
   ScanLine,
 } from 'lucide-react';
+import { AnimateOnScroll, StaggerContainer, StaggerItem } from './motion';
 
 export const FeatureGrid: React.FC = () => {
   return (
@@ -18,9 +19,9 @@ export const FeatureGrid: React.FC = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-primary/10 rounded-full blur-[150px] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <AnimateOnScroll className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary-light mb-3">
             <Check className="w-3.5 h-3.5" />
             <span>Complete Financial Control</span>
@@ -31,13 +32,13 @@ export const FeatureGrid: React.FC = () => {
           <p className="text-textMuted text-base sm:text-lg">
             No convoluted financial jargon and zero hidden fees. Penny delivers seamless individual tracking, group expense settling, and optional Pro features for power users.
           </p>
-        </div>
+        </AnimateOnScroll>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" stagger={0.08}>
+
           {/* Bento Item 1 (Double Width on LG): Group Bill Splitting & UPI */}
-          <div className="lg:col-span-2 group relative p-8 rounded-3xl bg-gradient-to-br from-surface to-surface-light border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
+          <StaggerItem className="lg:col-span-2 group relative p-8 rounded-3xl bg-gradient-to-br from-surface to-surface-light border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-6">
                 <div className="w-12 h-12 rounded-2xl bg-primary/15 border border-primary/30 flex items-center justify-center text-primary-light">
@@ -86,10 +87,10 @@ export const FeatureGrid: React.FC = () => {
                 <Check className="w-3.5 h-3.5" /> Zero Middleman Fees
               </span>
             </div>
-          </div>
+          </StaggerItem>
 
           {/* Bento Item 2: Personal Expense Tracker */}
-          <div className="group relative p-8 rounded-3xl bg-surface/75 border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
+          <StaggerItem className="group relative p-8 rounded-3xl bg-surface/75 border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-6">
                 <div className="w-12 h-12 rounded-2xl bg-surface-light border border-border flex items-center justify-center text-primary-light group-hover:bg-primary/20 transition-colors">
@@ -120,10 +121,10 @@ export const FeatureGrid: React.FC = () => {
               <span>Fast Keypad Entry</span>
               <span className="w-1.5 h-1.5 rounded-full bg-primary" />
             </div>
-          </div>
+          </StaggerItem>
 
           {/* Bento Item 3: Category Insights */}
-          <div className="group relative p-8 rounded-3xl bg-surface/75 border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
+          <StaggerItem className="group relative p-8 rounded-3xl bg-surface/75 border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-6">
                 <div className="w-12 h-12 rounded-2xl bg-surface-light border border-border flex items-center justify-center text-success group-hover:bg-success/20 transition-colors">
@@ -164,10 +165,10 @@ export const FeatureGrid: React.FC = () => {
               <span>100% On-Device Stats</span>
               <span className="w-1.5 h-1.5 rounded-full bg-success" />
             </div>
-          </div>
+          </StaggerItem>
 
           {/* Bento Item 4: Monthly Budget */}
-          <div className="group relative p-8 rounded-3xl bg-surface/75 border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
+          <StaggerItem className="group relative p-8 rounded-3xl bg-surface/75 border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-6">
                 <div className="w-12 h-12 rounded-2xl bg-surface-light border border-border flex items-center justify-center text-primary-light group-hover:bg-primary/20 transition-colors">
@@ -190,10 +191,10 @@ export const FeatureGrid: React.FC = () => {
               <span>Real-Time Alert Thresholds</span>
               <span className="w-1.5 h-1.5 rounded-full bg-primary" />
             </div>
-          </div>
+          </StaggerItem>
 
           {/* Bento Item 5: Statements & Export */}
-          <div className="group relative p-8 rounded-3xl bg-surface/75 border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
+          <StaggerItem className="group relative p-8 rounded-3xl bg-surface/75 border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-6">
                 <div className="w-12 h-12 rounded-2xl bg-surface-light border border-border flex items-center justify-center text-success group-hover:bg-success/20 transition-colors">
@@ -216,10 +217,10 @@ export const FeatureGrid: React.FC = () => {
               <span>Instant Share via WhatsApp</span>
               <span className="w-1.5 h-1.5 rounded-full bg-success" />
             </div>
-          </div>
+          </StaggerItem>
 
           {/* Bento Item 6: Privacy by Design & Hardware Keystore */}
-          <div className="group relative p-8 rounded-3xl bg-surface/75 border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
+          <StaggerItem className="group relative p-8 rounded-3xl bg-surface/75 border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-6">
                 <div className="w-12 h-12 rounded-2xl bg-success/15 border border-success/30 flex items-center justify-center text-success group-hover:bg-success/25 transition-colors">
@@ -250,10 +251,10 @@ export const FeatureGrid: React.FC = () => {
               <span>Google Play Data Safety Compliant</span>
               <span className="w-1.5 h-1.5 rounded-full bg-success" />
             </div>
-          </div>
+          </StaggerItem>
 
           {/* Bento Item 7 (Double Width): Receipt Scanner */}
-          <div className="lg:col-span-2 group relative p-8 rounded-3xl bg-gradient-to-br from-surface to-surface-light border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
+          <StaggerItem className="lg:col-span-2 group relative p-8 rounded-3xl bg-gradient-to-br from-surface to-surface-light border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-6">
                 <div className="w-12 h-12 rounded-2xl bg-primary/15 border border-primary/30 flex items-center justify-center text-primary-light">
@@ -297,9 +298,9 @@ export const FeatureGrid: React.FC = () => {
                 <Check className="w-3.5 h-3.5" /> Zero Cloud Upload
               </span>
             </div>
-          </div>
+          </StaggerItem>
 
-        </div>
+        </StaggerContainer>
 
       </div>
     </section>

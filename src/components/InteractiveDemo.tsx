@@ -18,6 +18,7 @@ import {
   Delete,
 } from 'lucide-react';
 import { DOWNLOAD_CONFIG, getPrimaryDownloadUrl, isExternalDownload } from '../data/siteContent';
+import { AnimateOnScroll } from './motion';
 
 // ─── Types ───
 interface DemoExpense {
@@ -594,7 +595,7 @@ export const InteractiveDemo: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
+        <AnimateOnScroll className="text-center max-w-2xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary-light mb-3">
             <Smartphone className="w-3.5 h-3.5" />
             <span>Live Interactive Demo</span>
@@ -605,7 +606,7 @@ export const InteractiveDemo: React.FC = () => {
           <p className="text-textMuted text-sm sm:text-base">
             Navigate between screens, add expenses, explore groups and insights &mdash; all right in your browser. No install needed.
           </p>
-        </div>
+        </AnimateOnScroll>
 
         {/* Demo Area */}
         <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-10 lg:gap-16">

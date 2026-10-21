@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 import { FAQS } from '../data/siteContent';
+import { AnimateOnScroll } from './motion';
 
 export const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -14,7 +15,7 @@ export const FAQ: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <AnimateOnScroll className="text-center max-w-2xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary-light mb-3">
             <HelpCircle className="w-3.5 h-3.5" />
             <span>Got Questions?</span>
@@ -25,10 +26,10 @@ export const FAQ: React.FC = () => {
           <p className="text-textMuted text-base sm:text-lg">
             Everything you need to know about Penny, group splits, installation, and data privacy.
           </p>
-        </div>
+        </AnimateOnScroll>
 
         {/* Accordion List */}
-        <div className="space-y-4">
+        <AnimateOnScroll delay={0.15} className="space-y-4">
           {FAQS.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
@@ -68,7 +69,7 @@ export const FAQ: React.FC = () => {
               </div>
             );
           })}
-        </div>
+        </AnimateOnScroll>
 
         {/* Contact prompt */}
         <div className="mt-12 text-center p-6 rounded-2xl bg-surface/40 border border-border">

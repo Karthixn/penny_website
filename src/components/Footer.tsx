@@ -98,11 +98,6 @@ export const Footer: React.FC<FooterProps> = ({
                   Pricing
                 </a>
               </li>
-              <li>
-                <a href="#changelog" className="hover:text-white transition-colors">
-                  Changelog
-                </a>
-              </li>
             </ul>
           </div>
 

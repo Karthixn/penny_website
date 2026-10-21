@@ -12,6 +12,7 @@ import {
   FileSpreadsheet,
   ShieldCheck,
 } from 'lucide-react';
+import { AnimateOnScroll } from './motion';
 
 const tabIcons = [
   <LayoutDashboard key="dash" className="w-4 h-4" />,
@@ -43,7 +44,7 @@ export const AppPreview: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
+        <AnimateOnScroll className="text-center max-w-2xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary-light mb-3">
             <Smartphone className="w-3.5 h-3.5" />
             <span>Interactive App Tour</span>
@@ -54,7 +55,7 @@ export const AppPreview: React.FC = () => {
           <p className="text-textMuted text-sm sm:text-base">
             Click through real Android screens to explore personal tracking, group splitting, spending analytics, and one-tap exports.
           </p>
-        </div>
+        </AnimateOnScroll>
 
         {/* Tab Strip (Pills) */}
         <div className="flex items-center justify-start sm:justify-center overflow-x-auto pb-4 mb-8 gap-2 no-scrollbar">
@@ -80,7 +81,7 @@ export const AppPreview: React.FC = () => {
         </div>
 
         {/* Main Showcase Container */}
-        <div className="bg-surface/85 border border-border rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-xl">
+        <AnimateOnScroll variant="scale-in" className="bg-surface/85 border border-border rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
             {/* Left Column: Screen Details & Key Highlights */}
@@ -274,7 +275,7 @@ export const AppPreview: React.FC = () => {
             </div>
 
           </div>
-        </div>
+        </AnimateOnScroll>
 
       </div>
     </section>

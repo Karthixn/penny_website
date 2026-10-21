@@ -1,6 +1,7 @@
 import React from 'react';
 import { Check, Crown, Sparkles, Download } from 'lucide-react';
 import { getPrimaryDownloadUrl } from '../data/siteContent';
+import { AnimateOnScroll, StaggerContainer, StaggerItem } from './motion';
 
 const FREE_FEATURES = [
   'Personal expense tracking',
@@ -32,7 +33,7 @@ export const Pricing: React.FC = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] bg-primary/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <AnimateOnScroll className="text-center max-w-2xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary-light mb-3">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Simple Pricing</span>
@@ -43,11 +44,11 @@ export const Pricing: React.FC = () => {
           <p className="text-textMuted text-base sm:text-lg">
             Every essential feature is free forever. Pro unlocks power features for serious budgeters.
           </p>
-        </div>
+        </AnimateOnScroll>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto" stagger={0.15}>
           {/* Free Tier */}
-          <div className="rounded-3xl bg-surface/80 border border-border p-8 flex flex-col">
+          <StaggerItem className="rounded-3xl bg-surface/80 border border-border p-8 flex flex-col">
             <div className="mb-6">
               <h3 className="text-xl font-extrabold text-white mb-1">Free</h3>
               <p className="text-textMuted text-sm">Everything you need to manage expenses</p>
@@ -75,10 +76,10 @@ export const Pricing: React.FC = () => {
               <Download className="w-4 h-4" />
               Download Free
             </a>
-          </div>
+          </StaggerItem>
 
           {/* Pro Tier */}
-          <div className="rounded-3xl bg-gradient-to-b from-primary/20 to-surface/80 border border-primary/40 p-8 flex flex-col relative">
+          <StaggerItem className="rounded-3xl bg-gradient-to-b from-primary/20 to-surface/80 border border-primary/40 p-8 flex flex-col relative">
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-primary text-white text-xs font-bold">
               Coming Soon
             </div>
@@ -110,8 +111,8 @@ export const Pricing: React.FC = () => {
             >
               Coming Soon
             </button>
-          </div>
-        </div>
+          </StaggerItem>
+        </StaggerContainer>
       </div>
     </section>
   );

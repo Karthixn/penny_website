@@ -6,6 +6,10 @@
   color-scheme: dark;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   body {
     background-color: #0B0B10;
@@ -94,10 +98,14 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Hide scrollbar inside demo phone */
+/* Hide scrollbar utilities */
+.no-scrollbar::-webkit-scrollbar,
 .demo-phone-scroll::-webkit-scrollbar {
   width: 0;
+  display: none;
 }
+.no-scrollbar,
 .demo-phone-scroll {
   scrollbar-width: none;
+  -ms-overflow-style: none;
 }

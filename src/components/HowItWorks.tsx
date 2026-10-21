@@ -1,6 +1,7 @@
 import React from 'react';
 import { DownloadCloud, ReceiptText, CheckCircle2, ArrowRight } from 'lucide-react';
 import { HOW_IT_WORKS_STEPS, APP_METADATA } from '../data/siteContent';
+import { AnimateOnScroll, StaggerContainer, StaggerItem } from './motion';
 
 const stepIcons: Record<string, React.ReactNode> = {
   DownloadCloud: <DownloadCloud className="w-8 h-8 text-primary-light" />,
@@ -14,7 +15,7 @@ export const HowItWorks: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <AnimateOnScroll className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary-light mb-3">
             <span>Fast Setup</span>
           </div>
@@ -24,13 +25,13 @@ export const HowItWorks: React.FC = () => {
           <p className="text-textMuted text-base sm:text-lg">
             Up and running in less than a minute. No complex account setups, no intrusive credit checks, and no payment gateways.
           </p>
-        </div>
+        </AnimateOnScroll>
 
         {/* Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8 relative" stagger={0.15}>
+
           {HOW_IT_WORKS_STEPS.map((stepItem, idx) => (
-            <div
+            <StaggerItem
               key={stepItem.step}
               className="relative p-8 rounded-2xl bg-surface/80 border border-border flex flex-col justify-between hover:border-primary/50 transition-all duration-300 shadow-xl"
             >
@@ -81,10 +82,10 @@ export const HowItWorks: React.FC = () => {
                   </span>
                 </div>
               )}
-            </div>
+            </StaggerItem>
           ))}
 
-        </div>
+        </StaggerContainer>
 
       </div>
     </section>
