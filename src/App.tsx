@@ -7,6 +7,8 @@ import { FeatureGrid } from './components/FeatureGrid';
 import { HowItWorks } from './components/HowItWorks';
 import { DownloadSection } from './components/DownloadSection';
 import { FAQ } from './components/FAQ';
+import { Pricing } from './components/Pricing';
+import { Changelog } from './components/Changelog';
 import { Footer } from './components/Footer';
 import { PrivacyPolicyModal } from './components/PrivacyPolicyModal';
 import { TermsModal } from './components/TermsModal';
@@ -40,8 +42,10 @@ export const App: React.FC = () => {
         <AppPreview />
         <FeatureGrid />
         <HowItWorks />
+        <Pricing />
         <DownloadSection />
         <FAQ />
+        <Changelog />
       </main>
 
       {/* Footer */}

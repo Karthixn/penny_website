@@ -48,7 +48,7 @@ export const DOWNLOAD_CONFIG = {
   minAndroid: 'Android 7.0+ (API 24)',
   targetArchitecture: 'ARM64 Native AOT',
   sha256: '83F2F4D7F173EDFCC6305C60C65CF9811D73E036060F40CFE4FB1028EDFB65AF',
-  contactEmail: 'support@penny.app',
+  contactEmail: 'support@pennyapp.dev',
   developerEmail: 'karthik.dev314@gmail.com',
   deleteAccountUrl: 'https://penny-37mv.onrender.com/delete-account',
 };

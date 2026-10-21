@@ -57,7 +57,7 @@ export const Footer: React.FC<FooterProps> = ({
                 className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-surface hover:bg-surface-light border border-border text-xs font-semibold text-white transition-colors"
               >
                 <Mail className="w-3.5 h-3.5 text-success" />
-                <span>support@penny.app</span>
+                <span>support@pennyapp.dev</span>
               </a>
             </div>
           </div>
@@ -91,6 +91,16 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <a href="#faq" className="hover:text-white transition-colors">
                   FAQ
+                </a>
+              </li>
+              <li>
+                <a href="#pricing" className="hover:text-white transition-colors">
+                  Pricing
+                </a>
+              </li>
+              <li>
+                <a href="#changelog" className="hover:text-white transition-colors">
+                  Changelog
                 </a>
               </li>
             </ul>
