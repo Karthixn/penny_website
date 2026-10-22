@@ -41,7 +41,7 @@ export const FeatureGrid: React.FC = () => {
           <StaggerItem className="lg:col-span-2 group relative p-8 rounded-3xl bg-gradient-to-br from-surface to-surface-light border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-primary/15 border border-primary/30 flex items-center justify-center text-primary-light">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-[#5A46F5]/10 border border-primary/30 flex items-center justify-center text-primary-light shadow-lg shadow-primary/10">
                   <Users className="w-6 h-6" />
                 </div>
                 <span className="text-xs font-bold px-3 py-1 rounded-full bg-warning/15 text-warning border border-warning/30 flex items-center gap-1.5">
@@ -93,7 +93,7 @@ export const FeatureGrid: React.FC = () => {
           <StaggerItem className="group relative p-8 rounded-3xl bg-surface/75 border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-surface-light border border-border flex items-center justify-center text-primary-light group-hover:bg-primary/20 transition-colors">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/15 to-[#5A46F5]/5 border border-primary/20 flex items-center justify-center text-primary-light group-hover:from-primary/25 group-hover:to-[#5A46F5]/15 transition-all shadow-lg shadow-primary/5">
                   <Wallet className="w-6 h-6" />
                 </div>
                 <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-surface-light text-primary-light border border-border">
@@ -127,7 +127,7 @@ export const FeatureGrid: React.FC = () => {
           <StaggerItem className="group relative p-8 rounded-3xl bg-surface/75 border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-surface-light border border-border flex items-center justify-center text-success group-hover:bg-success/20 transition-colors">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-success/15 to-green-600/5 border border-success/20 flex items-center justify-center text-success group-hover:from-success/25 group-hover:to-green-600/15 transition-all shadow-lg shadow-success/5">
                   <PieChart className="w-6 h-6" />
                 </div>
                 <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-surface-light text-success border border-border">
@@ -171,7 +171,7 @@ export const FeatureGrid: React.FC = () => {
           <StaggerItem className="group relative p-8 rounded-3xl bg-surface/75 border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-surface-light border border-border flex items-center justify-center text-primary-light group-hover:bg-primary/20 transition-colors">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/15 to-[#5A46F5]/5 border border-primary/20 flex items-center justify-center text-primary-light group-hover:from-primary/25 group-hover:to-[#5A46F5]/15 transition-all shadow-lg shadow-primary/5">
                   <TrendingUp className="w-6 h-6" />
                 </div>
                 <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-surface-light text-primary-light border border-border">
@@ -197,7 +197,7 @@ export const FeatureGrid: React.FC = () => {
           <StaggerItem className="group relative p-8 rounded-3xl bg-surface/75 border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-surface-light border border-border flex items-center justify-center text-success group-hover:bg-success/20 transition-colors">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-success/15 to-green-600/5 border border-success/20 flex items-center justify-center text-success group-hover:from-success/25 group-hover:to-green-600/15 transition-all shadow-lg shadow-success/5">
                   <FileSpreadsheet className="w-6 h-6" />
                 </div>
                 <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-surface-light text-success border border-border">
@@ -257,7 +257,7 @@ export const FeatureGrid: React.FC = () => {
           <StaggerItem className="lg:col-span-2 group relative p-8 rounded-3xl bg-gradient-to-br from-surface to-surface-light border border-border hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-primary/10 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-primary/15 border border-primary/30 flex items-center justify-center text-primary-light">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-[#5A46F5]/10 border border-primary/30 flex items-center justify-center text-primary-light shadow-lg shadow-primary/10">
                   <ScanLine className="w-6 h-6" />
                 </div>
                 <span className="text-xs font-bold px-3 py-1 rounded-full bg-primary/20 text-primary-light border border-primary/30 flex items-center gap-1.5 animate-pulse">

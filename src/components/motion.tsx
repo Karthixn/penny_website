@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, type Variants } from 'framer-motion';
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 32 },
+  hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 },
 };
 
@@ -55,7 +55,7 @@ export const AnimateOnScroll: React.FC<AnimateOnScrollProps> = ({
     variants={VARIANT_MAP[variant]}
     initial="hidden"
     whileInView="visible"
-    viewport={{ once, margin: '-60px' }}
+    viewport={{ once, amount: 0.15 }}
     transition={{ duration, delay, ease: [0.22, 1, 0.36, 1] }}
     className={className}
   >
@@ -79,7 +79,7 @@ export const StaggerContainer: React.FC<StaggerContainerProps> = ({
   <motion.div
     initial="hidden"
     whileInView="visible"
-    viewport={{ once: true, margin: '-60px' }}
+    viewport={{ once: true, amount: 0.1 }}
     transition={{ staggerChildren: stagger, delayChildren: delay }}
     className={className}
   >

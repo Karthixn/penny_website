@@ -2,6 +2,7 @@ import React from 'react';
 import { Download, Sparkles, Shield, ArrowRight, Smartphone, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { DOWNLOAD_CONFIG, getPrimaryDownloadUrl, isExternalDownload } from '../data/siteContent';
+import { IllustratedPhone } from './IllustratedPhone';
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -132,7 +133,7 @@ export const Hero: React.FC = () => {
             </motion.div>
           </div>
 
-          {/* Right Column: Phone Mockup */}
+          {/* Right Column: 2D Illustrated Phone */}
           <div className="lg:col-span-5 flex justify-center items-center relative">
             <motion.div
               className="absolute w-72 h-72 sm:w-80 sm:h-80 bg-primary/25 rounded-full blur-[90px] -z-10"
@@ -158,7 +159,7 @@ export const Hero: React.FC = () => {
                 <div className="text-left">
                   <div className="text-[11px] text-textMuted font-medium">1-Tap Settle Up</div>
                   <div className="text-xs font-bold text-white flex items-center gap-1.5">
-                    <span>₹2,450.00</span>
+                    <span>&#8377;2,450.00</span>
                     <span className="text-[10px] px-1.5 py-0.5 rounded bg-success/20 text-success font-semibold">GPay Ready</span>
                   </div>
                 </div>
@@ -177,17 +178,19 @@ export const Hero: React.FC = () => {
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
                 className="flex items-center gap-3 p-3.5 rounded-2xl bg-surface/90 border border-border/90 backdrop-blur-xl shadow-2xl shadow-black/60"
               >
-                <div className="w-10 h-10 rounded-xl overflow-hidden shadow-md shadow-[#5A46F5]/40 border border-white/15 shrink-0 bg-[#0B0B10] flex items-center justify-center">
-                  <img src="./images/penny_logo.png" alt="Penny Official Logo" className="w-full h-full object-cover" />
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#7C6FF7] to-[#5A46F5] flex items-center justify-center shadow-md shadow-[#5A46F5]/40">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
                 </div>
                 <div className="text-left">
                   <div className="text-[11px] text-textMuted font-medium">Debt Simplification</div>
-                  <div className="text-xs font-bold text-white">4 Transfers → 1 Transfer</div>
+                  <div className="text-xs font-bold text-white">4 Transfers &rarr; 1 Transfer</div>
                 </div>
               </motion.div>
             </motion.div>
 
-            {/* Phone with floating animation */}
+            {/* Illustrated Phone with floating animation */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
@@ -196,17 +199,8 @@ export const Hero: React.FC = () => {
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-                className="relative max-h-[500px] sm:max-h-[530px] rounded-[36px] p-2.5 bg-gradient-to-b from-[#2D3042] via-[#1A1C28] to-[#12131C] shadow-2xl shadow-primary/20 border border-white/10 ring-1 ring-black"
               >
-                <div className="relative rounded-[28px] overflow-hidden bg-background max-h-[480px] sm:max-h-[510px] aspect-[9/19.5] border border-border/80">
-                  <img
-                    src="./images/screen_home.png"
-                    alt="Penny Android App Dashboard showing total expenses, monthly budget, and quick actions"
-                    className="w-full h-full object-cover object-top select-none"
-                    loading="eager"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent pointer-events-none" />
-                </div>
+                <IllustratedPhone />
               </motion.div>
             </motion.div>
           </div>
