@@ -32,7 +32,7 @@ export const DOWNLOAD_CONFIG = {
   sourceType: 'gdrive' as const,
 
   // User's verified Google Drive release link
-  gdriveUrl: 'https://drive.google.com/file/d/1yEL5CbqgCrO3Po__0SCZChUmK8DxFcb2/view?usp=sharing',
+  gdriveUrl: 'https://drive.google.com/file/d/17cVn5m_VF_GmYj8E3JlE_sTjNnyoMEKp/view?usp=sharing',
   apkFileName: 'Penny-v1.0.0-release.apk',
 
   // Release metadata
