@@ -32,16 +32,16 @@ export const DOWNLOAD_CONFIG = {
   sourceType: 'gdrive' as const,
 
   // User's verified Google Drive release link
-  gdriveUrl: 'https://drive.google.com/file/d/1kxwiJyG2Cn6yyIgeRqjrTR1cD9NOStfU/view?usp=sharing',
-  apkFileName: 'Penny-v1.0.1-release.apk',
+  gdriveUrl: 'https://drive.google.com/file/d/1yEL5CbqgCrO3Po__0SCZChUmK8DxFcb2/view?usp=sharing',
+  apkFileName: 'Penny-v1.0.0-release.apk',
 
   // Release metadata
   name: 'Penny',
   tagline: 'Split smarter. Spend better.',
   description:
     'The dark-first personal expense tracker and group bill-splitting app for Android. Free core features, 1-tap UPI settlements, debt simplification, and zero ads.',
-  version: 'v1.0.1',
-  buildNumber: 'Build 17',
+  version: 'v1.0.0',
+  buildNumber: 'Build 18',
   releaseDate: 'October 2026',
   fileSizeBytes: 91936768,
   fileSizeDisplay: '87.7 MB',
