@@ -1,0 +1,8 @@
+/invite/*  /invite/index.html  200
+/images/*  /public/images/:splat  200
+/docs/*    /public/docs/:splat    200
+/favicon.ico /public/favicon.ico 200
+/favicon.png /public/favicon.png 200
+/favicon.svg /public/favicon.svg 200
+/robots.txt  /public/robots.txt  200
+/sitemap.xml /public/sitemap.xml 200
