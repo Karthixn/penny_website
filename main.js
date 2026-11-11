@@ -1,566 +1,408 @@
 /* ==========================================================================
-   PENNY — Modern Scroll-Driven & Interactive Landing Page
-   GSAP + ScrollTrigger + Lenis
+   PENNY — Interactive Frontend Scripts
+   GSAP + ScrollTrigger + Lenis Smooth Scroll + Walkthrough Controller
    ========================================================================== */
 
 (function () {
   "use strict";
 
-  // ── 1. Lenis Smooth Scrolling ──
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smoothWheel: true,
-  });
+  // ---------------------------------------------------------------------------
+  // 1. Lenis Smooth Scrolling Setup
+  // ---------------------------------------------------------------------------
+  let lenis = null;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-
-  // Sync Lenis with GSAP ScrollTrigger
-  lenis.on("scroll", ScrollTrigger.update);
-  gsap.ticker.add((time) => lenis.raf(time * 1000));
-  gsap.ticker.lagSmoothing(0);
-
-  // Register GSAP plugins
-  gsap.registerPlugin(ScrollTrigger);
-
-  // ── 2. Navigation Blur & Mobile Menu ──
-  const nav = document.getElementById("nav");
-  const navToggle = document.getElementById("nav-toggle");
-  const mobileMenu = document.getElementById("nav-mobile-menu");
-
-  ScrollTrigger.create({
-    start: 50,
-    onUpdate: (self) => {
-      nav.classList.toggle("scrolled", self.scroll() > 50);
-    },
-  });
-
-  if (navToggle && mobileMenu) {
-    navToggle.addEventListener("click", () => {
-      mobileMenu.classList.toggle("open");
-    });
-
-    document.querySelectorAll(".mobile-nav-link").forEach((link) => {
-      link.addEventListener("click", () => {
-        mobileMenu.classList.remove("open");
+  if (typeof Lenis !== "undefined" && !prefersReducedMotion) {
+    try {
+      lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
       });
-    });
-  }
 
-  // ── 3. Ambient Floating Particles in Hero ──
-  const particleContainer = document.getElementById("hero-particles");
-  function spawnParticle() {
-    if (!particleContainer) return;
-    const p = document.createElement("div");
-    p.className = "particle";
-    const size = Math.random() * 5 + 3;
-    const x = Math.random() * 100;
-    const dur = Math.random() * 4 + 4;
-    const delay = Math.random() * 2;
-    p.style.cssText = `
-      width: ${size}px;
-      height: ${size}px;
-      left: ${x}%;
-      bottom: -10px;
-      animation-duration: ${dur}s;
-      animation-delay: ${delay}s;
-    `;
-    particleContainer.appendChild(p);
-    setTimeout(() => p.remove(), (dur + delay) * 1000);
-  }
-
-  setInterval(spawnParticle, 350);
-  for (let i = 0; i < 12; i++) {
-    setTimeout(spawnParticle, i * 200);
-  }
-
-  // ── 4. Hero Entrance Animations ──
-  const heroTl = gsap.timeline({ delay: 0.2 });
-
-  // Pill badge bounce in
-  heroTl.fromTo("#hero-pill", 
-    { scale: 0.8, opacity: 0, y: -20 },
-    { scale: 1, opacity: 1, y: 0, duration: 0.6, ease: "back.out(1.8)" }
-  );
-
-  // Words stagger ("Track. Split. Save.")
-  document.querySelectorAll(".hero-word").forEach((word, i) => {
-    heroTl.to(word, {
-      opacity: 1,
-      y: 0,
-      rotateX: 0,
-      duration: 0.7,
-      ease: "power3.out",
-    }, 0.35 + i * 0.14);
-  });
-
-  // Subtitle & actions
-  heroTl.to(".hero-sub", {
-    opacity: 1,
-    y: 0,
-    duration: 0.6,
-    ease: "power2.out",
-  }, 0.8);
-
-  heroTl.to(".hero-actions", {
-    opacity: 1,
-    y: 0,
-    duration: 0.6,
-    ease: "power2.out",
-  }, 0.95);
-
-  // Phone Mockup Rise with 3D Depth
-  heroTl.fromTo("#hero-phone",
-    { y: 140, opacity: 0, scale: 0.85, rotateX: 12 },
-    { y: 0, opacity: 1, scale: 1, rotateX: 0, duration: 1.2, ease: "power3.out" },
-    0.7
-  );
-
-  // Floating Badges Elastic Pop
-  heroTl.fromTo(["#chip-left", "#chip-right"],
-    { scale: 0, opacity: 0 },
-    { scale: 1, opacity: 1, duration: 0.7, stagger: 0.2, ease: "back.out(2)" },
-    1.1
-  );
-
-  // Interactive 3D Cursor Tilt on Hero Phone
-  const heroSection = document.getElementById("hero");
-  const heroPhone = document.getElementById("hero-phone");
-  if (heroSection && heroPhone) {
-    heroSection.addEventListener("mousemove", (e) => {
-      const rect = heroSection.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-      gsap.to(heroPhone, {
-        rotateY: x * 16,
-        rotateX: -y * 14,
-        transformPerspective: 1000,
-        ease: "power2.out",
-        duration: 0.5,
-      });
-    });
-
-    heroSection.addEventListener("mouseleave", () => {
-      gsap.to(heroPhone, {
-        rotateY: 0,
-        rotateX: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      });
-    });
-  }
-
-  // ── 5. Problem Section — Floating Chaos Tags ──
-  const chaosItems = document.querySelectorAll(".chaos-item");
-  const chaosCoords = [
-    { x: "6%", y: "12%" },  { x: "74%", y: "14%" },
-    { x: "12%", y: "38%" }, { x: "82%", y: "36%" },
-    { x: "4%", y: "66%" },  { x: "70%", y: "62%" },
-    { x: "20%", y: "82%" }, { x: "78%", y: "82%" },
-    { x: "38%", y: "10%" }, { x: "56%", y: "76%" },
-    { x: "32%", y: "52%" }, { x: "64%", y: "24%" },
-  ];
-
-  chaosItems.forEach((item, i) => {
-    const coord = chaosCoords[i % chaosCoords.length];
-    item.style.left = coord.x;
-    item.style.top = coord.y;
-
-    const speed = parseFloat(item.dataset.speed) || 1;
-    const rot = parseFloat(item.dataset.rot) || 0;
-
-    gsap.fromTo(item,
-      {
-        opacity: 0,
-        scale: 0.5,
-        rotation: rot * 1.5,
-        z: -150,
-      },
-      {
-        opacity: 0.85,
-        scale: 1,
-        rotation: rot,
-        z: 0,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ".problem",
-          start: "top 75%",
-          end: "center center",
-          scrub: speed,
-        },
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
       }
-    );
+      requestAnimationFrame(raf);
 
-    // Subtle continuous floating
-    gsap.to(item, {
-      y: "random(-16, 16)",
-      x: "random(-10, 10)",
-      rotation: `random(${rot - 4}, ${rot + 4})`,
-      duration: "random(2.5, 4.5)",
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-      delay: i * 0.15,
+      if (typeof ScrollTrigger !== "undefined" && typeof gsap !== "undefined") {
+        lenis.on("scroll", ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+      }
+    } catch (e) {
+      console.warn("Lenis init skipped:", e);
+    }
+  }
+
+  // Register GSAP plugins safely
+  if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+  }
+
+  // ---------------------------------------------------------------------------
+  // 2. Navigation & Mobile Drawer
+  // ---------------------------------------------------------------------------
+  const header = document.getElementById("header");
+  const mobileToggle = document.getElementById("mobile-toggle");
+  const mobileDrawer = document.getElementById("mobile-drawer");
+
+  // Sticky header class toggle
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 40) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+  }, { passive: true });
+
+  // Mobile menu toggle
+  if (mobileToggle && mobileDrawer) {
+    mobileToggle.addEventListener("click", () => {
+      const isOpen = mobileDrawer.classList.toggle("open");
+      mobileToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+
+    // Close mobile drawer when clicking any link
+    mobileDrawer.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileDrawer.classList.remove("open");
+        mobileToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
+  // Smooth anchor scrolling
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      const targetId = this.getAttribute("href");
+      if (targetId === "#") return;
+      const targetEl = document.querySelector(targetId);
+      if (targetEl) {
+        e.preventDefault();
+        const headerOffset = 80;
+        const targetPos = targetEl.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+
+        if (lenis) {
+          lenis.scrollTo(targetEl, { offset: -headerOffset });
+        } else {
+          window.scrollTo({
+            top: targetPos,
+            behavior: "smooth"
+          });
+        }
+      }
     });
   });
 
-  // Problem headline reveal
-  gsap.from(".problem-headline", {
-    opacity: 0,
-    y: 40,
-    duration: 0.8,
-    scrollTrigger: {
-      trigger: ".problem",
-      start: "top 45%",
-      toggleActions: "play none none reverse",
-    },
-  });
+  // ---------------------------------------------------------------------------
+  // 3. Hero 3D Smartphone Mouse Tilt
+  // ---------------------------------------------------------------------------
+  const stage = document.getElementById("hero-mockup-stage");
+  const phoneWrap = document.getElementById("hero-phone-wrap");
 
-  gsap.from(".problem-sub", {
-    opacity: 0,
-    y: 30,
-    duration: 0.8,
-    delay: 0.15,
-    scrollTrigger: {
-      trigger: ".problem",
-      start: "top 45%",
-      toggleActions: "play none none reverse",
-    },
-  });
+  if (stage && phoneWrap && window.innerWidth > 1024 && !prefersReducedMotion) {
+    stage.addEventListener("mousemove", (e) => {
+      const rect = stage.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+      const y = (e.clientY - rect.top) / rect.height - 0.5; // -0.5 to 0.5
 
-  // ── 6. Solution Section Animations ──
-  gsap.from("#phone-solution", {
-    y: 120,
-    opacity: 0,
-    scale: 0.88,
-    rotation: -4,
-    duration: 1.1,
-    ease: "power3.out",
-    scrollTrigger: {
-      trigger: ".solution",
-      start: "top 65%",
-      toggleActions: "play none none reverse",
-    },
-  });
+      if (typeof gsap !== "undefined") {
+        gsap.to(phoneWrap, {
+          rotateY: x * 18,
+          rotateX: -y * 18,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+      }
+    });
 
-  gsap.from(".solution-list-item", {
-    opacity: 0,
-    x: -30,
-    stagger: 0.15,
-    duration: 0.6,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: ".solution-list",
-      start: "top 80%",
-      toggleActions: "play none none reverse",
-    },
-  });
+    stage.addEventListener("mouseleave", () => {
+      if (typeof gsap !== "undefined") {
+        gsap.to(phoneWrap, {
+          rotateY: -8,
+          rotateX: 6,
+          duration: 0.8,
+          ease: "power3.out",
+        });
+      }
+    });
+  }
 
-  // ── 7. Interactive Feature Showcase Data & Tab Switcher ──
-  const showcaseData = {
+  // ---------------------------------------------------------------------------
+  // 4. Problem Chaos Tags Float
+  // ---------------------------------------------------------------------------
+  const chaosCloud = document.getElementById("problem-chaos-cloud");
+  if (chaosCloud) {
+    const tags = chaosCloud.querySelectorAll(".chaos-tag");
+    const tagCoords = [
+      { top: "15%", left: "8%" },
+      { top: "12%", right: "10%" },
+      { top: "38%", left: "12%" },
+      { top: "35%", right: "8%" },
+      { top: "68%", left: "6%" },
+      { top: "65%", right: "12%" },
+      { top: "85%", left: "20%" },
+      { top: "82%", right: "18%" },
+    ];
+
+    tags.forEach((tag, i) => {
+      const coord = tagCoords[i % tagCoords.length];
+      if (coord.left) tag.style.left = coord.left;
+      if (coord.right) tag.style.right = coord.right;
+      if (coord.top) tag.style.top = coord.top;
+
+      const rot = parseFloat(tag.dataset.rot) || 0;
+      tag.style.transform = `rotate(${rot}deg)`;
+
+      if (typeof gsap !== "undefined" && !prefersReducedMotion) {
+        gsap.to(tag, {
+          y: "random(-15, 15)",
+          x: "random(-10, 10)",
+          rotation: rot + Math.random() * 6 - 3,
+          duration: 3 + Math.random() * 2,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: i * 0.25,
+        });
+      }
+    });
+  }
+
+  // ---------------------------------------------------------------------------
+  // 5. Interactive Application Screenshot Walkthrough
+  // ---------------------------------------------------------------------------
+  const walkthroughData = {
     home: {
-      badge: "Feature 01",
-      title: "Clean Daily Dashboard",
-      desc: "See your total balance, monthly budget progress, and recent transactions at a glance without cluttered menus.",
-      img: "public/images/screen_home.png",
-      highlights: ["Real-time spend meter", "Category breakdown", "Quick 1-tap add"]
+      src: "public/images/screen_home.png",
+      tag: "DASHBOARD",
+      title: "Personal Dashboard & Monthly Balance",
+      desc: "Unified dark interface showing monthly spend, budget ring, recent activity, and quick shortcuts."
     },
     add: {
-      badge: "Feature 02",
-      title: "Lightning Fast Logging",
-      desc: "Add expenses in under two seconds with smart auto-categorization, custom tags, and instant notes.",
-      img: "public/images/screen_add_expense.png",
-      highlights: ["Quick tags", "Dynamic keypad", "Auto-category detection"]
+      src: "public/images/screen_add_typed.png",
+      tag: "QUICK ADD",
+      title: "Instant Keypad & Category Tagging",
+      desc: "Fast custom numeric keypad with category chips and instant Personal vs. Group split toggle."
     },
-    groups: {
-      badge: "Feature 03",
-      title: "Effortless Group Splits",
-      desc: "Create trip or roommate groups, divide bills evenly or by exact share, and settle up without awkward discussions.",
-      img: "public/images/screen_groups.png",
-      highlights: ["Equal & custom splits", "Multi-person tracking", "1-tap settlement"]
+    group: {
+      src: "public/images/screen_group_expenses.png",
+      tag: "GROUP BILLS",
+      title: "Shared Ledger & Member Balances",
+      desc: "Transparent list of shared expenses, who paid, and who owes what with zero rounding error."
     },
     insights: {
-      badge: "Feature 04",
-      title: "Deep Visual Analytics",
-      desc: "Gain clarity on where your money actually goes with beautiful category charts, monthly comparisons, and trends.",
-      img: "public/images/screen_insights.png",
-      highlights: ["Monthly trends", "Visual category donuts", "Top spending alerts"]
+      src: "public/images/screen_insights_shopping.png",
+      tag: "INSIGHTS",
+      title: "Visual Category Analytics",
+      desc: "Interactive distribution charts and category breakdowns to monitor where your money goes."
     },
-    reminders: {
-      badge: "Feature 05",
-      title: "Proactive Bill Reminders",
-      desc: "Stay ahead of EMI dues, subscription renewals, and friend settlements before late fees accumulate.",
-      img: "public/images/screen_reminders.png",
-      highlights: ["Due date notifications", "Subscription tracker", "Zero missed payments"]
+    settle: {
+      src: "public/images/screen_settle.png",
+      tag: "SETTLE UP",
+      title: "1-Tap UPI Settlement & Statements",
+      desc: "Launch Google Pay or PhonePe directly with pre-filled VPA or export statements to CSV & PDF."
+    },
+    settings: {
+      src: "public/images/screen_settings.png",
+      tag: "SECURITY",
+      title: "Hardware Keystore & Account Controls",
+      desc: "Configure biometric lock, customize UPI VPA, and access permanent data erasure anytime."
     }
   };
 
-  const showcaseTabs = document.querySelectorAll(".showcase-tab");
-  const showcaseBadge = document.getElementById("showcase-badge");
-  const showcaseTitle = document.getElementById("showcase-title");
-  const showcaseDesc = document.getElementById("showcase-desc");
-  const showcaseHighlights = document.getElementById("showcase-highlights");
-  const showcaseImg = document.getElementById("showcase-img");
+  const wtTabs = document.querySelectorAll(".wt-tab");
+  const wtScreenImg = document.getElementById("wt-screen-img");
+  const wtCaptionTag = document.getElementById("wt-caption-tag");
+  const wtCaptionTitle = document.getElementById("wt-caption-title");
+  const wtCaptionDesc = document.getElementById("wt-caption-desc");
 
-  showcaseTabs.forEach((tab) => {
+  wtTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       const screenKey = tab.dataset.screen;
-      const data = showcaseData[screenKey];
+      const data = walkthroughData[screenKey];
       if (!data) return;
 
-      // Update active tab styling
-      showcaseTabs.forEach((t) => t.classList.remove("active"));
+      // Update active state
+      wtTabs.forEach((t) => {
+        t.classList.remove("active");
+        t.setAttribute("aria-selected", "false");
+      });
       tab.classList.add("active");
+      tab.setAttribute("aria-selected", "true");
 
-      // Smooth transition for details card
-      gsap.to("#showcase-card", {
-        opacity: 0,
-        y: 10,
-        duration: 0.2,
-        onComplete: () => {
-          showcaseBadge.textContent = data.badge;
-          showcaseTitle.textContent = data.title;
-          showcaseDesc.textContent = data.desc;
+      // Animate image swap
+      if (wtScreenImg) {
+        wtScreenImg.style.opacity = "0";
+        setTimeout(() => {
+          wtScreenImg.src = data.src;
+          wtScreenImg.alt = data.title;
+          wtScreenImg.style.opacity = "1";
+        }, 150);
+      }
 
-          showcaseHighlights.innerHTML = data.highlights
-            .map((h) => `<div class="highlight-chip">${h}</div>`)
-            .join("");
-
-          gsap.to("#showcase-card", {
-            opacity: 1,
-            y: 0,
-            duration: 0.35,
-            ease: "power2.out",
-          });
-        },
-      });
-
-      // Smooth transition for Phone screenshot
-      gsap.to(showcaseImg, {
-        opacity: 0.2,
-        scale: 0.96,
-        duration: 0.2,
-        onComplete: () => {
-          showcaseImg.src = data.img;
-          gsap.to(showcaseImg, {
-            opacity: 1,
-            scale: 1,
-            duration: 0.35,
-            ease: "power2.out",
-          });
-        },
-      });
+      // Update caption texts
+      if (wtCaptionTag) wtCaptionTag.textContent = data.tag;
+      if (wtCaptionTitle) wtCaptionTitle.textContent = data.title;
+      if (wtCaptionDesc) wtCaptionDesc.textContent = data.desc;
     });
   });
 
-  // ── 8. Interactive Split Calculator Sandbox ──
-  const scenarioButtons = document.querySelectorAll(".scenario-btn");
-  const demoTotal = document.getElementById("demo-total");
-  const demoPeople = document.getElementById("demo-people");
-  const demoEach = document.getElementById("demo-each");
-  const demoSummary = document.getElementById("demo-summary");
+  // ---------------------------------------------------------------------------
+  // 6. Comprehensive FAQ Accordion Controller
+  // ---------------------------------------------------------------------------
+  const faqItems = document.querySelectorAll(".faq-accordion-item");
 
-  scenarioButtons.forEach((btn) => {
+  faqItems.forEach((item) => {
+    const btn = item.querySelector(".faq-question-btn");
     btn.addEventListener("click", () => {
-      scenarioButtons.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
+      const isActive = item.classList.contains("active");
 
-      const amt = parseInt(btn.dataset.amt, 10);
-      const people = parseInt(btn.dataset.people, 10);
-      const cat = btn.dataset.cat;
-      const each = Math.round(amt / people);
+      // Close other accordions
+      faqItems.forEach((other) => {
+        other.classList.remove("active");
+        const otherBtn = other.querySelector(".faq-question-btn");
+        if (otherBtn) otherBtn.setAttribute("aria-expanded", "false");
+      });
 
-      // Animate text changes
-      gsap.fromTo([demoTotal, demoPeople, demoEach],
-        { scale: 1.1, opacity: 0.6 },
-        { scale: 1, opacity: 1, duration: 0.3, ease: "power2.out" }
-      );
-
-      demoTotal.textContent = `₹${amt.toLocaleString("en-IN")}`;
-      demoPeople.textContent = `${people} friends`;
-      demoEach.textContent = `₹${each.toLocaleString("en-IN")}`;
-      demoSummary.textContent = `${cat}: Each friend pays ₹${each.toLocaleString("en-IN")} • Settle instantly with 1 tap`;
+      // Toggle current accordion
+      if (!isActive) {
+        item.classList.add("active");
+        btn.setAttribute("aria-expanded", "true");
+      }
     });
   });
 
-  // ── 9. Core Features Grid Animation ──
-  document.querySelectorAll(".feature-card").forEach((card, i) => {
-    gsap.from(card, {
-      opacity: 0,
-      y: 50,
-      duration: 0.65,
-      delay: (i % 2) * 0.15,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: card,
-        start: "top 85%",
-        toggleActions: "play none none reverse",
-      },
+  // ---------------------------------------------------------------------------
+  // 7. GSAP ScrollTrigger Section Animations
+  // ---------------------------------------------------------------------------
+  if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined" && !prefersReducedMotion) {
+    // Hero Entrance
+    const heroTl = gsap.timeline({ delay: 0.2 });
+    heroTl.from(".hero-badge", { opacity: 0, y: 20, duration: 0.6, ease: "power2.out" })
+          .from(".hero-headline", { opacity: 0, y: 30, duration: 0.8, ease: "power3.out" }, "-=0.3")
+          .from(".hero-description", { opacity: 0, y: 20, duration: 0.6, ease: "power2.out" }, "-=0.4")
+          .from(".hero-cta-group", { opacity: 0, y: 20, duration: 0.6, ease: "power2.out" }, "-=0.4")
+          .from(".hero-trust-row", { opacity: 0, duration: 0.6 }, "-=0.2")
+          .from("#hero-phone-wrap", { opacity: 0, scale: 0.9, y: 50, duration: 1, ease: "power3.out" }, "-=0.8")
+          .from(".floating-glass-pill", { opacity: 0, scale: 0.7, stagger: 0.15, duration: 0.6, ease: "back.out(1.7)" }, "-=0.4");
+
+    // Metric items
+    gsap.utils.toArray(".metric-card").forEach((card, i) => {
+      gsap.from(card, {
+        opacity: 0,
+        y: 20,
+        duration: 0.6,
+        delay: i * 0.1,
+        scrollTrigger: {
+          trigger: card,
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+      });
     });
-  });
 
-  // ── 10. Penny Pro Section Reveal ──
-  gsap.from(".pro-badge", {
-    scale: 0,
-    opacity: 0,
-    duration: 0.6,
-    ease: "back.out(2)",
-    scrollTrigger: {
-      trigger: ".pro",
-      start: "top 60%",
-      toggleActions: "play none none reverse",
-    },
-  });
+    // Step cards
+    gsap.utils.toArray(".step-card").forEach((card, i) => {
+      gsap.from(card, {
+        opacity: 0,
+        y: 30,
+        duration: 0.6,
+        delay: i * 0.12,
+        scrollTrigger: {
+          trigger: card,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
 
-  gsap.from(".pro-title", {
-    y: 35,
-    opacity: 0,
-    duration: 0.8,
-    scrollTrigger: {
-      trigger: ".pro",
-      start: "top 55%",
-      toggleActions: "play none none reverse",
-    },
-  });
+    // Feature Showcase Rows
+    gsap.utils.toArray(".showcase-row").forEach((row) => {
+      const content = row.querySelector(".showcase-content");
+      const mockup = row.querySelector(".showcase-mockup");
 
-  document.querySelectorAll(".pro-feature").forEach((feat, i) => {
-    gsap.from(feat, {
+      gsap.from(content, {
+        opacity: 0,
+        x: row.classList.contains("reverse") ? 40 : -40,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: row,
+          start: "top 75%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      gsap.from(mockup, {
+        opacity: 0,
+        y: 50,
+        duration: 0.9,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: row,
+          start: "top 75%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
+
+    // Debt Simplification Box
+    gsap.from(".simplification-box", {
       opacity: 0,
-      x: -40,
-      duration: 0.6,
-      delay: i * 0.12,
+      y: 40,
+      duration: 0.8,
       ease: "power2.out",
       scrollTrigger: {
-        trigger: ".pro-features",
+        trigger: ".simplification-box",
         start: "top 80%",
         toggleActions: "play none none reverse",
       },
     });
-  });
 
-  // ── 11. Download / Play Store Coming Soon Section ──
-  gsap.from("#phone-download", {
-    y: 90,
-    rotation: -4,
-    opacity: 0,
-    duration: 1,
-    ease: "power3.out",
-    scrollTrigger: {
-      trigger: ".download",
-      start: "top 65%",
-      toggleActions: "play none none reverse",
-    },
-  });
+    // Pricing Cards
+    gsap.utils.toArray(".pricing-card").forEach((card, i) => {
+      gsap.from(card, {
+        opacity: 0,
+        y: 30,
+        duration: 0.6,
+        delay: i * 0.1,
+        scrollTrigger: {
+          trigger: card,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
 
-  // Floating bounce on download phone
-  gsap.to("#phone-download", {
-    y: -14,
-    duration: 3,
-    repeat: -1,
-    yoyo: true,
-    ease: "sine.inOut",
-  });
+    // Security Bento Cards
+    gsap.utils.toArray(".bento-card").forEach((card, i) => {
+      gsap.from(card, {
+        opacity: 0,
+        y: 25,
+        duration: 0.6,
+        delay: i * 0.08,
+        scrollTrigger: {
+          trigger: card,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
 
-  gsap.from(".download-title", {
-    x: 40,
-    opacity: 0,
-    duration: 0.8,
-    scrollTrigger: {
-      trigger: ".download",
-      start: "top 60%",
-      toggleActions: "play none none reverse",
-    },
-  });
-
-  gsap.from(".playstore-coming-soon-badge", {
-    y: 25,
-    opacity: 0,
-    duration: 0.6,
-    delay: 0.2,
-    scrollTrigger: {
-      trigger: ".download",
-      start: "top 55%",
-      toggleActions: "play none none reverse",
-    },
-  });
-
-  // Waitlist Form Submission Handling
-  const waitlistForm = document.getElementById("waitlist-form");
-  const waitlistInput = document.getElementById("waitlist-email");
-  const waitlistMsg = document.getElementById("waitlist-msg");
-  const waitlistBtn = document.getElementById("waitlist-btn");
-
-  // Check if previously subscribed
-  const savedEmail = localStorage.getItem("penny_waitlist_email");
-  if (savedEmail && waitlistMsg) {
-    waitlistMsg.style.display = "block";
-    waitlistMsg.textContent = `✓ You're already registered (${savedEmail}) for Google Play launch notifications!`;
-    if (waitlistInput) waitlistInput.value = savedEmail;
-  }
-
-  if (waitlistForm && waitlistInput && waitlistMsg) {
-    waitlistForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = waitlistInput.value.trim();
-      if (!email) return;
-
-      const originalBtnHtml = waitlistBtn.innerHTML;
-      waitlistBtn.innerHTML = `<span>Saving...</span>`;
-      waitlistBtn.disabled = true;
-
-      // Save locally immediately
-      localStorage.setItem("penny_waitlist_email", email);
-
-      // Attempt to save to backend if server endpoint exists
-      try {
-        await fetch("/api/waitlist", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email }),
-        });
-      } catch (err) {
-        // Fallback gracefully on static hosts like GitHub Pages
-      }
-
-      // UI Feedback
-      waitlistBtn.innerHTML = `<span>Saved!</span>`;
-      waitlistBtn.style.background = "#10B981";
-      waitlistBtn.disabled = false;
-
-      gsap.fromTo(waitlistMsg,
-        { opacity: 0, y: -10, display: "block" },
-        { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
-      );
-
-      waitlistMsg.innerHTML = `✓ <strong>${email}</strong> has been added! We'll email you the moment Penny launches on the Google Play Store.`;
+    // Download Card Glow
+    gsap.from(".download-card", {
+      opacity: 0,
+      scale: 0.95,
+      duration: 0.8,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".download-card",
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      },
     });
   }
-
-  // ── 12. Smooth Anchor Navigation via Lenis ──
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", (e) => {
-      const targetId = anchor.getAttribute("href");
-      if (targetId === "#") return;
-      e.preventDefault();
-      const targetElem = document.querySelector(targetId);
-      if (targetElem) {
-        lenis.scrollTo(targetElem, { offset: -70 });
-      }
-    });
-  });
-
-  // Also hook the hero pill badge to scroll down to #download
-  const heroPill = document.getElementById("hero-pill");
-  if (heroPill) {
-    heroPill.addEventListener("click", () => {
-      const downloadSec = document.querySelector("#download");
-      if (downloadSec) lenis.scrollTo(downloadSec, { offset: -70 });
-    });
-  }
-
 })();

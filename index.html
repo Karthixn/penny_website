@@ -3,576 +3,1165 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Penny — Track. Split. Save. Smart Money Management</title>
-  <meta name="description" content="Penny is an intelligent, ad-free expense tracker designed to track spending, split bills with friends, and save money effortlessly. Coming soon to Google Play.">
-  <link rel="icon" type="image/jpeg" href="penny_icon.jpg">
-  <meta property="og:image" content="penny_banner.jpg">
-  <meta property="og:title" content="Penny — Track. Split. Save.">
-  <meta property="og:description" content="Intelligent, ad-free expense manager and group bill splitter. Coming soon to Google Play.">
+  <title>Penny — Smart Expense Tracking & Group Bill Splitting for Android</title>
+  <meta name="description" content="Penny is a privacy-first personal finance and group expense-splitting app for Android. 1-tap direct UPI settlements, graph debt simplification, offline sync, and zero ads.">
+  <link rel="canonical" href="https://pennyhq.netlify.app/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pennyhq.netlify.app/">
+  <meta property="og:title" content="Penny — Smart Expense Tracking & Group Bill Splitting">
+  <meta property="og:description" content="Track daily expenses, split bills with flatmates, simplify group debts, and settle up via 1-tap UPI deep-links. Zero ads, zero SMS reading, 100% private.">
+  <meta property="og:image" content="https://pennyhq.netlify.app/public/images/brand_identity_board.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://pennyhq.netlify.app/">
+  <meta name="twitter:title" content="Penny — Smart Expense Tracking & Group Bill Splitting">
+  <meta name="twitter:description" content="Split bills with friends, track personal budgets, and settle in 1 tap via Google Pay or PhonePe. Free core features, zero ads.">
+  <meta name="twitter:image" content="https://pennyhq.netlify.app/public/images/brand_identity_board.png">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="public/favicon.svg">
+  <link rel="icon" type="image/png" sizes="64x64" href="public/images/favicon-64.png">
+  <link rel="shortcut icon" href="public/favicon.ico">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Penny",
+    "operatingSystem": "Android 7.0 and up",
+    "applicationCategory": "FinanceApplication",
+    "description": "A privacy-focused personal expense tracker and group bill-splitting app featuring 1-tap UPI settlements and debt simplification.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR"
+    },
+    "featureList": [
+      "Personal Expense Tracking",
+      "Group Bill Splitting",
+      "Graph-based Debt Simplification",
+      "1-Tap UPI Settlements",
+      "Monthly Budget Tracking",
+      "Biometric App Lock",
+      "Excel & CSV Statements",
+      "Offline-first Sync"
+    ],
+    "softwareVersion": "1.0.1",
+    "url": "https://pennyhq.netlify.app/"
+  }
+  </script>
 </head>
 <body>
-
-  <!-- Ambient Background Lighting -->
-  <div class="ambient-glow ambient-glow-1"></div>
-  <div class="ambient-glow ambient-glow-2"></div>
-  <div class="ambient-glow ambient-glow-3"></div>
-
-  <!-- ===== NAVIGATION ===== -->
-  <nav class="nav" id="nav">
-    <div class="nav-inner">
-      <a href="#" class="nav-logo">
-        <div class="nav-logo-icon">
-          <img src="penny_icon.jpg" alt="Penny Logo" class="nav-logo-img">
+  <!-- ===== HEADER & NAVIGATION ===== -->
+  <header class="header" id="header">
+    <div class="nav-container">
+      <a href="#" class="brand-logo" aria-label="Penny Home">
+        <div class="brand-icon-box">
+          <img src="public/images/penny_ribbon_logo.png" alt="Penny Logo" class="brand-logo-img">
         </div>
-        <span class="nav-brand-name">Penny</span>
+        <span class="brand-name">Penny</span>
+        <span class="brand-badge">v1.0.1</span>
       </a>
 
-      <div class="nav-links">
-        <a href="#problem">Why Penny</a>
-        <a href="#interactive-showcase">Features</a>
-        <a href="#interactive-demo">Try Demo</a>
-        <a href="#pro">Pro</a>
-        <a href="#download" class="nav-cta">
-          <span class="pulse-dot"></span>
-          <span>Coming Soon</span>
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#simplification" class="nav-link">Debt Engine</a>
+        <a href="#walkthrough" class="nav-link">App Tour</a>
+        <a href="#pro" class="nav-link">Pro</a>
+        <a href="#security" class="nav-link">Privacy</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#download" class="btn btn-secondary btn-sm nav-apk-btn">
+          <span>Get APK</span>
         </a>
-      </div>
-
-      <button class="nav-mobile-toggle" id="nav-toggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-
-    <!-- Mobile Menu dropdown -->
-    <div class="nav-mobile-menu" id="nav-mobile-menu">
-      <a href="#problem" class="mobile-nav-link">Why Penny</a>
-      <a href="#interactive-showcase" class="mobile-nav-link">Features</a>
-      <a href="#interactive-demo" class="mobile-nav-link">Try Demo</a>
-      <a href="#pro" class="mobile-nav-link">Pro</a>
-      <a href="#download" class="mobile-nav-link mobile-cta">Get Notified on Launch</a>
-    </div>
-  </nav>
-
-  <!-- ===== HERO SECTION ===== -->
-  <section class="hero" id="hero">
-    <div class="hero-particles" id="hero-particles"></div>
-    
-    <div class="hero-container">
-      <!-- Announcement Pill -->
-      <div class="hero-pill-badge" id="hero-pill">
-        <span class="pill-tag">Early Access</span>
-        <span class="pill-text">Will be available in Play Store soon!</span>
-        <span class="pill-arrow">&rarr;</span>
-      </div>
-
-      <!-- Main Headline -->
-      <h1 class="hero-title">
-        <span class="hero-word" data-delay="0">Track.</span>
-        <span class="hero-word" data-delay="1">Split.</span>
-        <span class="hero-word hero-word-gradient" data-delay="2">Save.</span>
-      </h1>
-
-      <p class="hero-sub">
-        The beautifully simple, offline-first expense manager.<br class="hide-mobile">
-        Log expenses in 2 seconds, split group bills without drama, and understand your money.
-      </p>
-
-      <!-- Action Row -->
-      <div class="hero-actions">
-        <a href="#download" class="btn-primary">
-          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        <a href="#download" class="btn btn-primary btn-sm nav-cta-btn">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 20.61V3.39c0-.89.97-1.45 1.74-.99l14.54 8.61c.74.44.74 1.54 0 1.98L4.74 21.6c-.77.46-1.74-.1-1.74-.99z"/>
           </svg>
-          <span>Notify Me on Launch</span>
+          <span>Google Play</span>
         </a>
-        <a href="#interactive-showcase" class="btn-secondary">
-          <span>Explore App Screens</span>
-          <svg class="btn-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </a>
-      </div>
 
-      <!-- Hero Visual Showcase (3D Phone Mockup + Floating Badges) -->
-      <div class="hero-showcase" id="hero-showcase">
-        
-        <!-- Floating badge: Left -->
-        <div class="floating-chip chip-left" id="chip-left">
-          <div class="chip-icon bg-green">&#10003;</div>
-          <div class="chip-text">
-            <span class="chip-title">Dinner Split Settled</span>
-            <span class="chip-sub">+&#8377;850 received from Rohan</span>
-          </div>
-        </div>
-
-        <!-- Floating badge: Right -->
-        <div class="floating-chip chip-right" id="chip-right">
-          <div class="chip-icon bg-purple">&#128200;</div>
-          <div class="chip-text">
-            <span class="chip-title">Monthly Budget</span>
-            <span class="chip-sub">&#8377;14,800 left &bull; On Track</span>
-          </div>
-        </div>
-
-        <!-- Main Phone Mockup -->
-        <div class="hero-phone-wrap" id="hero-phone">
-          <div class="phone-device">
-            <div class="phone-camera-island">
-              <span class="camera-lens"></span>
-            </div>
-            <div class="phone-screen-frame">
-              <img src="public/images/screen_home.png" alt="Penny Home Screen" class="phone-screen-img">
-              <div class="phone-glare"></div>
-            </div>
-          </div>
-          <!-- Phone Glow Backdrop -->
-          <div class="phone-ambient-halo"></div>
-        </div>
-      </div>
-
-      <!-- Trust Metrics -->
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-number">100%</span>
-          <span class="stat-desc">Private & Offline</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-number">0</span>
-          <span class="stat-desc">Zero Ads or Tracking</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-number">&lt; 2s</span>
-          <span class="stat-desc">Instant Quick Log</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Scroll Indicator -->
-    <div class="scroll-indicator">
-      <div class="scroll-mouse">
-        <div class="scroll-dot"></div>
-      </div>
-      <span>Scroll to explore</span>
-    </div>
-  </section>
-
-  <!-- ===== PROBLEM SECTION (THE CHAOS) ===== -->
-  <section class="problem" id="problem">
-    <div class="problem-container">
-      <div class="problem-chaos" id="problem-chaos">
-        <div class="chaos-item chaos-tag-red" data-speed="1.2" data-rot="15">&#8377;2,450 &bull; Dining Out</div>
-        <div class="chaos-item chaos-tag-amber" data-speed="0.8" data-rot="-20">&#8377;899 &bull; Swiggy</div>
-        <div class="chaos-item chaos-tag-blue" data-speed="1.5" data-rot="25">Rent Split Pending</div>
-        <div class="chaos-item chaos-tag-purple" data-speed="0.6" data-rot="-12">&#8377;14,500 EMI</div>
-        <div class="chaos-item chaos-tag-red" data-speed="1.1" data-rot="18">"Who paid for groceries?"</div>
-        <div class="chaos-item chaos-tag-cyan" data-speed="0.9" data-rot="-28">&#8377;340 Cab</div>
-        <div class="chaos-item chaos-tag-amber" data-speed="1.3" data-rot="8">Weekend Goa Trip &#8377;8,200</div>
-        <div class="chaos-item chaos-tag-red" data-speed="0.7" data-rot="-15">&#8377;4,120 Credit Card</div>
-        <div class="chaos-item chaos-tag-purple" data-speed="1.4" data-rot="30">Electricity Bill Due</div>
-        <div class="chaos-item chaos-tag-blue" data-speed="1.0" data-rot="-22">"Did Rahul settle?"</div>
-        <div class="chaos-item chaos-tag-cyan" data-speed="0.5" data-rot="14">&#8377;650 Coffee & Snacks</div>
-        <div class="chaos-item chaos-tag-amber" data-speed="1.6" data-rot="-8">&#8377;1,299 Netflix & Wifi</div>
-      </div>
-      
-      <div class="problem-text">
-        <div class="section-badge badge-warning">The Daily Headache</div>
-        <h2 class="problem-headline">Tired of losing track<br>of where your money goes?</h2>
-        <p class="problem-sub">
-          Messy group texts. Forgotten split IOUs. Spreadsheets you never open.<br>
-          Managing daily expenses shouldn't feel like a part-time job.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SOLUTION SECTION ===== -->
-  <section class="solution" id="solution">
-    <div class="solution-inner">
-      <div class="solution-text">
-        <div class="section-badge badge-primary">The Remedy</div>
-        <h2 class="solution-headline">Meet <span class="gradient-text">Penny</span>.</h2>
-        <p class="solution-sub">Your personal finances and group splits, organized effortlessly in seconds.</p>
-        
-        <ul class="solution-list">
-          <li class="solution-list-item">
-            <span class="list-bullet">&#10003;</span>
-            <div>
-              <strong>Type, tap, done:</strong> Log any expense with categorized icons and quick notes in under two seconds.
-            </div>
-          </li>
-          <li class="solution-list-item">
-            <span class="list-bullet">&#10003;</span>
-            <div>
-              <strong>Instant Split Math:</strong> Add your friends, split equally or custom, and Penny keeps exact tallies.
-            </div>
-          </li>
-          <li class="solution-list-item">
-            <span class="list-bullet">&#10003;</span>
-            <div>
-              <strong>Zero Noise:</strong> No ads, no spam notifications, no bank login permissions required.
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="solution-visual">
-        <div class="phone-device phone-device-elevated" id="phone-solution">
-          <div class="phone-camera-island">
-            <span class="camera-lens"></span>
-          </div>
-          <div class="phone-screen-frame">
-            <img src="public/images/screen_add_expense.png" alt="Penny Add Expense Screen" class="phone-screen-img">
-            <div class="phone-glare"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== INTERACTIVE APP SHOWCASE ===== -->
-  <section class="interactive-showcase" id="interactive-showcase">
-    <div class="section-header">
-      <div class="section-badge badge-primary">Visual Tour</div>
-      <h2 class="section-title">Designed with obsessive detail</h2>
-      <p class="section-sub">Tap below to preview how Penny handles every aspect of your daily finances.</p>
-    </div>
-
-    <!-- Showcase Tabs -->
-    <div class="showcase-tabs">
-      <button class="showcase-tab active" data-screen="home">
-        <span class="tab-icon">&#127968;</span>
-        <span class="tab-label">Home Overview</span>
-      </button>
-      <button class="showcase-tab" data-screen="add">
-        <span class="tab-icon">&#10133;</span>
-        <span class="tab-label">Quick Logging</span>
-      </button>
-      <button class="showcase-tab" data-screen="groups">
-        <span class="tab-icon">&#128101;</span>
-        <span class="tab-label">Group Splits</span>
-      </button>
-      <button class="showcase-tab" data-screen="insights">
-        <span class="tab-icon">&#128202;</span>
-        <span class="tab-label">Deep Insights</span>
-      </button>
-      <button class="showcase-tab" data-screen="reminders">
-        <span class="tab-icon">&#128276;</span>
-        <span class="tab-label">Bill Reminders</span>
-      </button>
-    </div>
-
-    <!-- Showcase Display Stage -->
-    <div class="showcase-stage">
-      <!-- Screen Details Card -->
-      <div class="showcase-card" id="showcase-card">
-        <span class="card-step-badge" id="showcase-badge">Feature 01</span>
-        <h3 class="card-title" id="showcase-title">Clean Daily Dashboard</h3>
-        <p class="card-desc" id="showcase-desc">
-          See your total balance, monthly budget progress, and recent transactions at a glance without cluttered menus.
-        </p>
-        
-        <div class="card-highlights" id="showcase-highlights">
-          <div class="highlight-chip">Real-time spend meter</div>
-          <div class="highlight-chip">Category breakdown</div>
-          <div class="highlight-chip">Quick 1-tap add</div>
-        </div>
-      </div>
-
-      <!-- Center Phone Mockup displaying selected screen -->
-      <div class="showcase-phone-container">
-        <div class="phone-device phone-device-large">
-          <div class="phone-camera-island">
-            <span class="camera-lens"></span>
-          </div>
-          <div class="phone-screen-frame">
-            <img src="public/images/screen_home.png" alt="Penny Feature Preview" class="phone-screen-img showcase-active-img" id="showcase-img">
-            <div class="phone-glare"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== INTERACTIVE MINI CALCULATOR / SPEED DEMO ===== -->
-  <section class="interactive-demo" id="interactive-demo">
-    <div class="demo-card">
-      <div class="demo-header">
-        <div class="section-badge badge-cyan">Interactive Sandbox</div>
-        <h2 class="demo-title">Experience Penny's split speed</h2>
-        <p class="demo-sub">Tap common scenarios to see how Penny calculates and divides bills in real-time.</p>
-      </div>
-
-      <div class="demo-scenarios">
-        <button class="scenario-btn active" data-amt="1200" data-people="4" data-cat="Pizza Night">
-          <span>🍕 Team Pizza Night</span>
-          <strong>&#8377;1,200</strong>
-        </button>
-        <button class="scenario-btn" data-amt="3600" data-people="3" data-cat="Cab to Airport">
-          <span>🚕 Airport Cab</span>
-          <strong>&#8377;3,600</strong>
-        </button>
-        <button class="scenario-btn" data-amt="15000" data-people="5" data-cat="Goa Villa Stay">
-          <span>🏖️ Weekend Villa</span>
-          <strong>&#8377;15,000</strong>
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
         </button>
       </div>
+    </div>
+  </header>
 
-      <!-- Live Split Preview Box -->
-      <div class="split-calculator-box">
-        <div class="calc-row">
-          <div>
-            <span class="calc-label">Total Expense</span>
-            <div class="calc-val-large" id="demo-total">&#8377;1,200</div>
-          </div>
-          <div class="calc-divider-v"></div>
-          <div>
-            <span class="calc-label">Split Among</span>
-            <div class="calc-val-large" id="demo-people">4 friends</div>
-          </div>
-          <div class="calc-divider-v"></div>
-          <div>
-            <span class="calc-label">Each Person Owes</span>
-            <div class="calc-val-highlight" id="demo-each">&#8377;300</div>
-          </div>
-        </div>
-
-        <div class="calc-status-bar">
-          <span class="status-indicator-dot"></span>
-          <span id="demo-summary">Each friend pays &#8377;300 &bull; Settle instantly with 1 tap</span>
-        </div>
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <div class="mobile-drawer-inner">
+      <nav class="mobile-nav-links">
+        <a href="#how-it-works" class="mob-link">How It Works</a>
+        <a href="#features" class="mob-link">Features</a>
+        <a href="#simplification" class="mob-link">Debt Simplification</a>
+        <a href="#walkthrough" class="mob-link">Screenshot Walkthrough</a>
+        <a href="#pro" class="mob-link">Penny Pro & Pricing</a>
+        <a href="#security" class="mob-link">Privacy & Security</a>
+        <a href="#faq" class="mob-link">FAQ</a>
+      </nav>
+      <div class="mobile-drawer-ctas">
+        <a href="#download" class="btn btn-primary btn-block mob-cta">Get on Google Play</a>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ===== FEATURES GRID ===== -->
-  <section class="features" id="features">
-    <div class="section-header">
-      <div class="section-badge badge-primary">Core Capabilities</div>
-      <h2 class="section-title">Everything you need. Nothing you don't.</h2>
-      <p class="section-sub">Built from the ground up for speed, privacy, and visual elegance.</p>
-    </div>
+  <main>
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero-section" id="hero">
+      <div class="hero-bg-glow"></div>
+      <div class="hero-grid-pattern"></div>
 
-    <div class="features-grid">
-      <div class="feature-card" data-feature="1">
-        <div class="feature-icon-wrap bg-purple-soft">
-          <svg class="feature-icon" viewBox="0 0 48 48" fill="none">
-            <rect x="6" y="10" width="36" height="28" rx="6" stroke="currentColor" stroke-width="2.5"/>
-            <path d="M6 18h36" stroke="currentColor" stroke-width="2.5"/>
-            <circle cx="14" cy="28" r="3" fill="currentColor" opacity=".5"/>
-            <path d="M22 26h14M22 31h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>Lightning Fast Entry</h3>
-        <p>Auto-categorize transactions, add tags, and record expenses in less than two seconds. No lag, no friction.</p>
-      </div>
-
-      <div class="feature-card" data-feature="2">
-        <div class="feature-icon-wrap bg-green-soft">
-          <svg class="feature-icon" viewBox="0 0 48 48" fill="none">
-            <circle cx="18" cy="20" r="7" stroke="currentColor" stroke-width="2.5"/>
-            <circle cx="30" cy="20" r="7" stroke="currentColor" stroke-width="2.5"/>
-            <path d="M24 15.5a7 7 0 000 9" stroke="currentColor" stroke-width="2" opacity=".4"/>
-            <path d="M10 38c0-5 4-8 8-8h12c4 0 8 3 8 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>Smart Group Splits</h3>
-        <p>Split bills evenly or with customized shares. Penny keeps track of who paid and simplifies settlements.</p>
-      </div>
-
-      <div class="feature-card" data-feature="3">
-        <div class="feature-icon-wrap bg-blue-soft">
-          <svg class="feature-icon" viewBox="0 0 48 48" fill="none">
-            <circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2.5"/>
-            <path d="M24 14v10l7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M24 8a16 16 0 0113.86 8" stroke="#7C6FF7" stroke-width="3" stroke-linecap="round"/>
-            <path d="M37.86 16A16 16 0 0140 24" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>Clear Financial Insights</h3>
-        <p>Dynamic charts and categorized breakdowns show exactly where every rupee flows each month.</p>
-      </div>
-
-      <div class="feature-card" data-feature="4">
-        <div class="feature-icon-wrap bg-amber-soft">
-          <svg class="feature-icon" viewBox="0 0 48 48" fill="none">
-            <path d="M12 22s8-4 8-10V7l-8-3-8 3v5c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2.5"/>
-            <path d="M20 22h16c2 0 4 2 4 4v10c0 2-2 4-4 4H16c-2 0-4-2-4-4V26" stroke="currentColor" stroke-width="2" opacity=".4"/>
-          </svg>
-        </div>
-        <h3>100% Offline & Private</h3>
-        <p>Your financial records remain strictly on your own device. No selling data, no third-party trackers, no ads.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PRO SECTION ===== -->
-  <section class="pro" id="pro">
-    <div class="pro-glow"></div>
-    <div class="pro-content">
-      <div class="pro-badge">PENNY PRO</div>
-      <h2 class="pro-title">Unlock the<br><span class="gradient-text-gold">full power</span></h2>
-      <p class="pro-sub">Supercharge your financial management with professional grade utilities.</p>
-
-      <div class="pro-features">
-        <div class="pro-feature">
-          <div class="pro-feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-              <polyline points="14 2 14 8 20 8"/>
-              <line x1="16" y1="13" x2="8" y2="13"/>
-              <line x1="16" y1="17" x2="8" y2="17"/>
-            </svg>
+      <div class="container hero-container">
+        <div class="hero-text-col">
+          <div class="pill-tag hero-badge">
+            <span class="pill-dot"></span>
+            <span>BUILT FOR PRIVACY &bull; NO ADS &bull; DIRECT UPI</span>
           </div>
-          <div>
-            <h4>Export PDF & Excel Statements</h4>
-            <p>Generate clean, tax-ready expense sheets and PDF reports with one tap.</p>
-          </div>
-        </div>
 
-        <div class="pro-feature">
-          <div class="pro-feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 00-3-3.87"/>
-              <path d="M16 3.13a4 4 0 010 7.75"/>
-            </svg>
-          </div>
-          <div>
-            <h4>Unlimited Shared Groups</h4>
-            <p>Create dedicated split groups for flatmates, trips, office lunches, and celebrations.</p>
-          </div>
-        </div>
+          <h1 class="hero-headline">
+            Master Your Money.<br>
+            <span class="gradient-text">Settle With Friends.</span>
+          </h1>
 
-        <div class="pro-feature">
-          <div class="pro-feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
-          </div>
-          <div>
-            <h4>Encrypted Cloud Backup & Sync</h4>
-            <p>Seamlessly restore your history across devices with end-to-end encryption.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+          <p class="hero-description">
+            The dark-mode personal finance tracker and group expense splitter. Split rent, dining, and trips effortlessly, collapse tangled group debts into minimal payments, and settle in 1 tap directly via Google Pay or PhonePe.
+          </p>
 
-  <!-- ===== DOWNLOAD / COMING SOON TO PLAY STORE SECTION ===== -->
-  <section class="download" id="download">
-    <div class="download-content">
-      
-      <!-- Left side: App Preview Phone -->
-      <div class="download-phone" id="phone-download">
-        <div class="phone-device phone-device-sm">
-          <div class="phone-camera-island">
-            <span class="camera-lens"></span>
-          </div>
-          <div class="phone-screen-frame">
-            <img src="public/images/screen_insights.png" alt="Penny App on Google Play" class="phone-screen-img">
-            <div class="phone-glare"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right side: Launch Information & Notify Me Box -->
-      <div class="download-info">
-        <div class="coming-soon-pill">
-          <span class="pulse-dot"></span>
-          <span>LAUNCH STATUS</span>
-        </div>
-
-        <h2 class="download-title">
-          Will be available in<br>
-          <span class="gradient-text-playstore">Play Store soon!</span>
-        </h2>
-        
-        <p class="download-sub">
-          We are putting the final touches on Penny for Android. Free forever, zero ads, no subscription locks on core tracking.
-        </p>
-
-        <!-- Official Google Play Store "Coming Soon" Badge -->
-        <div class="playstore-coming-soon-badge">
-          <div class="play-logo-wrap">
-            <svg class="play-icon" viewBox="0 0 512 512">
-              <path fill="#4285F4" d="M32.5 28.1l235.3 227.9L32.5 483.9c-7.3-6.1-11.8-15.3-11.8-25.7V53.8c0-10.4 4.5-19.6 11.8-25.7z"/>
-              <path fill="#34A853" d="M346.7 334.8L267.8 256l78.9-78.8 92.5 53.4c17.5 10.1 17.5 26.6 0 36.7l-92.5 67.5z"/>
-              <path fill="#FBBC04" d="M267.8 256L32.5 28.1C38.6 23 46.8 20 55.7 20c7.8 0 15.6 2.3 22.8 6.5l268.2 154.9L267.8 256z"/>
-              <path fill="#EA4335" d="M267.8 256l78.9 78.8L78.5 489.5c-7.2 4.2-15 6.5-22.8 6.5-8.9 0-17.1-3-23.2-8.1L267.8 256z"/>
-            </svg>
-          </div>
-          <div class="play-badge-info">
-            <span class="play-badge-tag">AVAILABLE IN PLAY STORE SOON</span>
-            <span class="play-badge-title">Google Play Pre-Registration</span>
-          </div>
-          <div class="play-badge-state">Soon</div>
-        </div>
-
-        <!-- Waitlist / Email Notification Form -->
-        <div class="waitlist-box">
-          <label for="waitlist-email" class="waitlist-label">Be the first to get the download link:</label>
-          <form class="waitlist-form" id="waitlist-form">
-            <input 
-              type="email" 
-              id="waitlist-email" 
-              placeholder="Enter your email address..." 
-              required
-              class="waitlist-input"
-            >
-            <button type="submit" class="waitlist-submit" id="waitlist-btn">
-              <span>Notify Me</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="submit-arrow">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
+          <div class="hero-cta-group">
+            <a href="#download" class="btn btn-primary btn-lg hero-cta-play">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 20.61V3.39c0-.89.97-1.45 1.74-.99l14.54 8.61c.74.44.74 1.54 0 1.98L4.74 21.6c-.77.46-1.74-.1-1.74-.99z"/>
               </svg>
-            </button>
-          </form>
-          <div class="waitlist-confirmation" id="waitlist-msg">
-            &#10004; You're on the list! We'll notify you as soon as Penny goes live on Google Play.
+              <div>
+                <span class="btn-subtext">GET IT ON</span>
+                <span class="btn-maintext">Google Play</span>
+              </div>
+            </a>
           </div>
-          <span class="waitlist-privacy-note">&#128274; Strictly no spam. Unsubscribe anytime in one click.</span>
+
+          <div class="hero-trust-row">
+            <div class="trust-item">
+              <svg class="trust-check" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>100% Free Core Features</span>
+            </div>
+            <div class="trust-item">
+              <svg class="trust-check" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>Zero SMS or Contact Scraping</span>
+            </div>
+            <div class="trust-item">
+              <svg class="trust-check" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>Android 7.0+ (ARM64)</span>
+            </div>
+          </div>
         </div>
 
+        <!-- 3D Smartphone Visual Column -->
+        <div class="hero-visual-col">
+          <div class="mockup-stage" id="hero-mockup-stage">
+            <!-- Floating Pill 1: Settled via UPI -->
+            <div class="floating-glass-pill pill-settle" id="float-settle">
+              <div class="pill-icon-circle green">
+                <svg viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div class="pill-text-block">
+                <span class="pill-meta">Goa Trip &bull; Settle Up</span>
+                <span class="pill-value">&#8377;1,450 paid via UPI</span>
+              </div>
+            </div>
+
+            <!-- Floating Pill 2: Biometric Keystore -->
+            <div class="floating-glass-pill pill-security" id="float-security">
+              <div class="pill-icon-circle purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </div>
+              <div class="pill-text-block">
+                <span class="pill-meta">Hardware Keystore</span>
+                <span class="pill-value">Biometric Secured</span>
+              </div>
+            </div>
+
+            <!-- Floating Pill 3: Budget Remaining -->
+            <div class="floating-glass-pill pill-budget" id="float-budget">
+              <div class="pill-icon-circle blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+              </div>
+              <div class="pill-text-block">
+                <span class="pill-meta">Monthly Budget</span>
+                <span class="pill-value">68% Remaining</span>
+              </div>
+            </div>
+
+            <!-- The 3D Flagship Phone Mockup -->
+            <div class="phone-3d-wrap" id="hero-phone-wrap">
+              <div class="phone-frame-premium">
+                <!-- Physical Details -->
+                <div class="phone-speaker-slit"></div>
+                <div class="phone-camera-punch"></div>
+                <div class="phone-glare-overlay"></div>
+
+                <!-- Screen Wrapper -->
+                <div class="phone-screen-inner">
+                  <img src="public/images/screen_home.png" alt="Penny App Dashboard" class="phone-screenshot" loading="eager">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- ===== SOCIAL PROOF & KEY VALUE METRICS ===== -->
+    <section class="metrics-bar">
+      <div class="container">
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <span class="metric-num">0%</span>
+            <span class="metric-label">Hidden Fees or Markups</span>
+            <p class="metric-desc">Penny connects directly to UPI apps. We never touch or hold your money.</p>
+          </div>
+          <div class="metric-card">
+            <span class="metric-num">100%</span>
+            <span class="metric-label">Ad-Free Experience</span>
+            <p class="metric-desc">No banner ads, no affiliate popups, and no marketing trackers.</p>
+          </div>
+          <div class="metric-card">
+            <span class="metric-num">1-Tap</span>
+            <span class="metric-label">Direct UPI Deep-Links</span>
+            <p class="metric-desc">Pre-populates beneficiary VPA and exact paise directly in Google Pay & PhonePe.</p>
+          </div>
+          <div class="metric-card">
+            <span class="metric-num">Local-First</span>
+            <span class="metric-label">Instant Offline Logging</span>
+            <p class="metric-desc">Log spends anytime on flights or without network. Syncs automatically.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROBLEM & CHAOS SECTION ===== -->
+    <section class="problem-section" id="problem">
+      <div class="problem-particles" id="problem-chaos-cloud">
+        <div class="chaos-tag" data-speed="1.2" data-rot="12">&#8377;2,450 Dinner</div>
+        <div class="chaos-tag" data-speed="0.8" data-rot="-18">&#8377;12,000 Flat Rent</div>
+        <div class="chaos-tag" data-speed="1.4" data-rot="24">Who paid for groceries?</div>
+        <div class="chaos-tag" data-speed="0.6" data-rot="-12">&#8377;899 Wi-Fi Bill</div>
+        <div class="chaos-tag" data-speed="1.1" data-rot="20">Awkward reminders</div>
+        <div class="chaos-tag" data-speed="0.9" data-rot="-28">&#8377;3,200 Weekend Trip</div>
+        <div class="chaos-tag" data-speed="1.3" data-rot="15">Tangled IOU webs</div>
+        <div class="chaos-tag" data-speed="0.7" data-rot="-10">&#8377;450 Uber Ride</div>
+      </div>
+
+      <div class="container problem-content">
+        <div class="section-badge-center">THE EVERYDAY HEADACHE</div>
+        <h2 class="section-headline-center">
+          Tired of losing track of every rupee<br>
+          <span class="gradient-text">and fighting over messy splits?</span>
+        </h2>
+        <p class="section-subtext-center">
+          Shared flats, road trips, and group dinners turn into tangled IOU nightmares. Traditional apps are bloated with ads, harvest your private SMS inbox, or demand complicated setups. Penny replaces the chaos with effortless clarity.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== HOW PENNY WORKS (3 STEPS) ===== -->
+    <section class="how-it-works-section" id="how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <div class="pill-tag">HOW PENNY WORKS</div>
+          <h2 class="section-title">From Expense to Settled in Three Steps</h2>
+          <p class="section-sub">Simple, transparent, and built to eliminate friction among friends.</p>
+        </div>
+
+        <div class="steps-grid">
+          <!-- Step 1 -->
+          <div class="step-card">
+            <div class="step-header">
+              <span class="step-number">01</span>
+              <div class="step-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="M9 12l2 2 4-4"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="step-title">Install & Secure Instantly</h3>
+            <p class="step-desc">
+              Download the lightweight APK or Google Play build. Sign in securely via 6-digit email OTP and lock the app with Android Keystore biometric protection. No banking credentials needed.
+            </p>
+            <div class="step-footer-pill">
+              <svg viewBox="0 0 16 16" fill="currentColor">
+                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+              </svg>
+              <span>30-second onboarding</span>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step-card">
+            <div class="step-header">
+              <span class="step-number">02</span>
+              <div class="step-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="step-title">Log Daily Spends or Split Bills</h3>
+            <p class="step-desc">
+              Log personal spending in 3 taps, or create a group for flatmates, trips, or team lunches. Share permanent invite links and split bills equally, by exact amounts, or by custom percentage.
+            </p>
+            <div class="step-footer-pill">
+              <svg viewBox="0 0 16 16" fill="currentColor">
+                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+              </svg>
+              <span>Equal, exact, or percentage splits</span>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step-card">
+            <div class="step-header">
+              <span class="step-number">03</span>
+              <div class="step-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="5" width="20" height="14" rx="2"/>
+                  <line x1="2" y1="10" x2="22" y2="10"/>
+                </svg>
+              </div>
+            </div>
+            <h3 class="step-title">Settle in 1-Tap via Direct UPI</h3>
+            <p class="step-desc">
+              Penny calculates who owes who with zero rounding errors. Tap "Settle Up" to automatically trigger Google Pay, PhonePe, or Paytm with the recipient's UPI VPA and exact amount pre-filled.
+            </p>
+            <div class="step-footer-pill">
+              <svg viewBox="0 0 16 16" fill="currentColor">
+                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+              </svg>
+              <span>Zero transaction fees</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FEATURE DEEP-DIVES (ALTERNATING WITH REAL SCREENSHOTS) ===== -->
+    <section class="features-deepdive" id="features">
+      <div class="container">
+        <div class="section-header">
+          <div class="pill-tag">ENGINEERED FOR REAL LIFE</div>
+          <h2 class="section-title">Everything You Need to Command Your Finances</h2>
+          <p class="section-sub">Real screenshots from the live Penny application. No concepts, no mockups.</p>
+        </div>
+
+        <!-- Deep Dive 1: Personal Tracking -->
+        <div class="showcase-row">
+          <div class="showcase-content">
+            <div class="module-badge">01 / PERSONAL TRACKING</div>
+            <h3 class="showcase-heading">Lightning-Fast Logging With Zero Mental Friction</h3>
+            <p class="showcase-body">
+              Adding an expense shouldn't feel like doing taxes. Penny's dedicated custom keypad lets you enter the amount, assign a category (Food, Groceries, Travel, Entertainment), add a note, and save in under four seconds.
+            </p>
+            <ul class="feature-checklist">
+              <li>
+                <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span><strong>Integer arithmetic in paise</strong>: Eliminates floating-point rounding discrepancies.</span>
+              </li>
+              <li>
+                <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span><strong>Offline-First SQLite caching</strong>: Never wait for network bars to record a spend.</span>
+              </li>
+              <li>
+                <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span><strong>Instant Mode Switch</strong>: Flip between Personal spend and Group bill in 1 tap.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="showcase-mockup">
+            <div class="phone-frame-showcase">
+              <div class="phone-speaker-slit"></div>
+              <div class="phone-camera-punch"></div>
+              <div class="phone-glare-overlay"></div>
+              <img src="public/images/screen_add_typed.png" alt="Penny Add Expense Screen" class="phone-screenshot" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Deep Dive 2: Group Splitting -->
+        <div class="showcase-row reverse">
+          <div class="showcase-content">
+            <div class="module-badge">02 / GROUP SPLITTING</div>
+            <h3 class="showcase-heading">Transparent Shared Balances For Flatmates & Trips</h3>
+            <p class="showcase-body">
+              Say goodbye to awkward balance arguments and "who paid for what" confusion. Create dedicated group ledgers for apartment rent, vacation expenses, or dinner outings. Every participant sees identical, synchronized balances in real-time.
+            </p>
+            <ul class="feature-checklist">
+              <li>
+                <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span><strong>Permanent Reusable Invites</strong>: Friends join with a simple invite code or custom deep-link scheme.</span>
+              </li>
+              <li>
+                <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span><strong>Flexible Split Logic</strong>: Support for equal splits, exact custom rupee amounts, or percentage shares.</span>
+              </li>
+              <li>
+                <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span><strong>Push Notifications via FCM</strong>: Instant background alerts when a group member logs an expense.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="showcase-mockup">
+            <div class="phone-frame-showcase">
+              <div class="phone-speaker-slit"></div>
+              <div class="phone-camera-punch"></div>
+              <div class="phone-glare-overlay"></div>
+              <img src="public/images/screen_group_expenses.png" alt="Penny Group Bill Feed" class="phone-screenshot" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Deep Dive 3: Visual Insights & Budgeting -->
+        <div class="showcase-row">
+          <div class="showcase-content">
+            <div class="module-badge">03 / BUDGETS & INSIGHTS</div>
+            <h3 class="showcase-heading">See Where Every Rupee Goes with Interactive Visuals</h3>
+            <p class="showcase-body">
+              Take full control of your monthly cashflow. Penny visualizes your spending patterns with clean donut breakdowns, weekly trend comparisons, and category percentages so you spot lifestyle creep before it hurts.
+            </p>
+            <ul class="feature-checklist">
+              <li>
+                <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span><strong>Monthly Budget Progress Ring</strong>: Live status shows whether you're under or over budget.</span>
+              </li>
+              <li>
+                <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span><strong>Category Breakdown</strong>: Instant insights into dining, transit, shopping, utilities, and rent.</span>
+              </li>
+              <li>
+                <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span><strong>Export Anytime (Free)</strong>: Download comprehensive CSV, JSON, or PDF statements whenever needed.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="showcase-mockup">
+            <div class="phone-frame-showcase">
+              <div class="phone-speaker-slit"></div>
+              <div class="phone-camera-punch"></div>
+              <div class="phone-glare-overlay"></div>
+              <img src="public/images/screen_insights_shopping.png" alt="Penny Spending Insights Screen" class="phone-screenshot" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Deep Dive 4: Settle Up via UPI -->
+        <div class="showcase-row reverse">
+          <div class="showcase-content">
+            <div class="module-badge">04 / 1-TAP UPI SETTLEMENT</div>
+            <h3 class="showcase-heading">Settle Debts Directly via Google Pay & PhonePe</h3>
+            <p class="showcase-body">
+              Never copy-paste bank accounts or ask for UPI IDs again. When it's time to settle, Penny prepares the exact transfer URI. Tapping "Pay Now" seamlessly launches your preferred UPI app on your phone with the payee's VPA and amount pre-filled.
+            </p>
+            <ul class="feature-checklist">
+              <li>
+                <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span><strong>Peer-to-Peer Direct</strong>: No intermediate wallet or Penny wallet balance. Transactions happen directly bank-to-bank.</span>
+              </li>
+              <li>
+                <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span><strong>WhatsApp Shareable Slips</strong>: Generate clean text summary receipts to post into group chats in 1 tap.</span>
+              </li>
+              <li>
+                <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <span><strong>Audit Logged</strong>: Settle records are stored permanently in the Supabase PostgreSQL ledger.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="showcase-mockup">
+            <div class="phone-frame-showcase">
+              <div class="phone-speaker-slit"></div>
+              <div class="phone-camera-punch"></div>
+              <div class="phone-glare-overlay"></div>
+              <img src="public/images/screen_settle.png" alt="Penny 1-Tap UPI Settle Screen" class="phone-screenshot" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== DEBT SIMPLIFICATION SHOWCASE ===== -->
+    <section class="simplification-section" id="simplification">
+      <div class="container">
+        <div class="simplification-box">
+          <div class="simplification-header">
+            <div class="pill-tag purple">PRO GRAPH ALGORITHM</div>
+            <h2 class="section-title">Smart Debt Simplification</h2>
+            <p class="section-sub">
+              Why make 10 confusing payments when 2 do the exact same job? Penny Pro uses a graph-based mathematical optimization algorithm to collapse tangled multi-person IOUs into the absolute minimum number of transactions.
+            </p>
+          </div>
+
+          <div class="comparison-grid">
+            <!-- Without Penny -->
+            <div class="comparison-card chaos-side">
+              <div class="comparison-badge red">WITHOUT DEBT SIMPLIFICATION</div>
+              <h4 class="comparison-title">10 Confusing Payments</h4>
+              <p class="comparison-note">Everyone pays everyone back and forth in circles.</p>
+
+              <div class="iou-list">
+                <div class="iou-item"><span>Rahul owes Priya</span><strong>&#8377;450</strong></div>
+                <div class="iou-item"><span>Priya owes Ananya</span><strong>&#8377;350</strong></div>
+                <div class="iou-item"><span>Ananya owes Karthik</span><strong>&#8377;600</strong></div>
+                <div class="iou-item"><span>Karthik owes Rahul</span><strong>&#8377;200</strong></div>
+                <div class="iou-item"><span>Rohan owes Priya</span><strong>&#8377;800</strong></div>
+                <div class="iou-item muted"><span>+ 5 more circular transfers...</span></div>
+              </div>
+              <div class="comparison-footer">
+                <span class="warning-badge">Result: 10 transactions &bull; High confusion</span>
+              </div>
+            </div>
+
+            <!-- With Penny -->
+            <div class="comparison-card smart-side">
+              <div class="comparison-badge green">WITH PENNY PRO ENGINE</div>
+              <h4 class="comparison-title">Only 2 Direct Payments</h4>
+              <p class="comparison-note">Graph solver minimizes edges while keeping everyone 100% square.</p>
+
+              <div class="optimized-list">
+                <div class="opt-item">
+                  <div class="opt-avatars">
+                    <span class="avatar-tag">Rohan</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    <span class="avatar-tag">Karthik</span>
+                  </div>
+                  <div class="opt-amount">&#8377;800</div>
+                </div>
+
+                <div class="opt-item">
+                  <div class="opt-avatars">
+                    <span class="avatar-tag">Rahul</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    <span class="avatar-tag">Karthik</span>
+                  </div>
+                  <div class="opt-amount">&#8377;250</div>
+                </div>
+
+                <div class="opt-summary-box">
+                  <svg viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>80% reduction in total transfers &bull; 0 mathematical discrepancy</span>
+                </div>
+              </div>
+
+              <div class="comparison-footer">
+                <span class="success-badge">Result: Settled in 2 taps &bull; Zero confusion</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== INTERACTIVE SCREENSHOT WALKTHROUGH ===== -->
+    <section class="walkthrough-section" id="walkthrough">
+      <div class="container">
+        <div class="section-header">
+          <div class="pill-tag">APP TOUR</div>
+          <h2 class="section-title">Explore Penny Screen by Screen</h2>
+          <p class="section-sub">Click through actual production screens to preview the experience.</p>
+        </div>
+
+        <div class="walkthrough-layout">
+          <!-- Screen Navigation Tabs -->
+          <div class="walkthrough-tabs" role="tablist">
+            <button class="wt-tab active" data-screen="home" role="tab" aria-selected="true">
+              <div class="wt-tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </div>
+              <div class="wt-tab-info">
+                <span class="wt-tab-title">1. Home Dashboard</span>
+                <span class="wt-tab-desc">Monthly total, budget status & quick actions</span>
+              </div>
+            </button>
+
+            <button class="wt-tab" data-screen="add" role="tab" aria-selected="false">
+              <div class="wt-tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+              </div>
+              <div class="wt-tab-info">
+                <span class="wt-tab-title">2. Quick Add Expense</span>
+                <span class="wt-tab-desc">Fast keypad, categories & Personal/Group toggle</span>
+              </div>
+            </button>
+
+            <button class="wt-tab" data-screen="group" role="tab" aria-selected="false">
+              <div class="wt-tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div class="wt-tab-info">
+                <span class="wt-tab-title">3. Group Bills Ledger</span>
+                <span class="wt-tab-desc">Shared transactions, member debts & balances</span>
+              </div>
+            </button>
+
+            <button class="wt-tab" data-screen="insights" role="tab" aria-selected="false">
+              <div class="wt-tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+              </div>
+              <div class="wt-tab-info">
+                <span class="wt-tab-title">4. Deep Spending Insights</span>
+                <span class="wt-tab-desc">Category distribution & percentage charts</span>
+              </div>
+            </button>
+
+            <button class="wt-tab" data-screen="settle" role="tab" aria-selected="false">
+              <div class="wt-tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              </div>
+              <div class="wt-tab-info">
+                <span class="wt-tab-title">5. 1-Tap UPI Settle Up</span>
+                <span class="wt-tab-desc">Direct GPay/PhonePe launch & statement exports</span>
+              </div>
+            </button>
+
+            <button class="wt-tab" data-screen="settings" role="tab" aria-selected="false">
+              <div class="wt-tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              </div>
+              <div class="wt-tab-info">
+                <span class="wt-tab-title">6. Security & Profile Controls</span>
+                <span class="wt-tab-desc">Biometric switch, UPI VPA & account erase</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Walkthrough Screen Viewer -->
+          <div class="walkthrough-viewer">
+            <div class="phone-frame-walkthrough">
+              <div class="phone-speaker-slit"></div>
+              <div class="phone-camera-punch"></div>
+              <div class="phone-glare-overlay"></div>
+              <div class="walkthrough-screen-box">
+                <img id="wt-screen-img" src="public/images/screen_home.png" alt="Penny Active Screen" class="wt-screen-active">
+              </div>
+            </div>
+
+            <div class="wt-caption-card" id="wt-caption">
+              <div class="wt-caption-badge" id="wt-caption-tag">DASHBOARD</div>
+              <h4 class="wt-caption-title" id="wt-caption-title">Personal Dashboard & Activity</h4>
+              <p class="wt-caption-text" id="wt-caption-desc">
+                Clean overview of total monthly spend, budget progress, and quick shortcuts for immediate expense logging.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PENNY PRO & TRANSPARENT PRICING ===== -->
+    <section class="pricing-section" id="pro">
+      <div class="container">
+        <div class="section-header">
+          <div class="pill-tag gold">HONEST FINTECH PRICING</div>
+          <h2 class="section-title">Upgrade to Penny Pro</h2>
+          <p class="section-sub">
+            The core app is 100% free forever. Pro unlocks advanced algorithmic tools for power spenders and frequent travelers.
+          </p>
+        </div>
+
+        <!-- Free vs Pro Matrix Comparison -->
+        <div class="comparison-table-wrap">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th class="feature-col">Feature</th>
+                <th class="tier-col">Penny Free</th>
+                <th class="tier-col pro-col">Penny Pro</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Daily Personal Expense Logging</td>
+                <td><span class="check-yes">&#10003; Unlimited</span></td>
+                <td><span class="check-yes pro">&#10003; Unlimited</span></td>
+              </tr>
+              <tr>
+                <td>Shared Groups & Bill Splitting</td>
+                <td><span class="check-yes">&#10003; Unlimited</span></td>
+                <td><span class="check-yes pro">&#10003; Unlimited</span></td>
+              </tr>
+              <tr>
+                <td>1-Tap UPI Settlements (GPay / PhonePe)</td>
+                <td><span class="check-yes">&#10003; Direct Launch</span></td>
+                <td><span class="check-yes pro">&#10003; Direct Launch</span></td>
+              </tr>
+              <tr>
+                <td>Monthly Budget Progress & Alert Ring</td>
+                <td><span class="check-yes">&#10003; Included</span></td>
+                <td><span class="check-yes pro">&#10003; Included</span></td>
+              </tr>
+              <tr>
+                <td>Biometric App Lock (Fingerprint / PIN)</td>
+                <td><span class="check-yes">&#10003; 100% Free</span></td>
+                <td><span class="check-yes pro">&#10003; 100% Free</span></td>
+              </tr>
+              <tr>
+                <td>Export to CSV, JSON & PDF Statements</td>
+                <td><span class="check-yes">&#10003; Included</span></td>
+                <td><span class="check-yes pro">&#10003; Included</span></td>
+              </tr>
+              <tr>
+                <td>Smart Debt Simplification Graph Engine</td>
+                <td><span class="check-no">&mdash;</span></td>
+                <td><span class="check-yes pro">&#10003; Graph Optimized</span></td>
+              </tr>
+              <tr>
+                <td>Smart Bill Reminders (Rent, Wi-Fi, Gym)</td>
+                <td>Up to 3 reminders</td>
+                <td><span class="check-yes pro">&#10003; Unlimited + Alerts</span></td>
+              </tr>
+              <tr>
+                <td>Multi-Currency Travel Converter</td>
+                <td><span class="check-no">&mdash;</span></td>
+                <td><span class="check-yes pro">&#10003; Real-Time FX Rates</span></td>
+              </tr>
+              <tr>
+                <td>Custom Category Creation & Emojis</td>
+                <td>Standard Categories</td>
+                <td><span class="check-yes pro">&#10003; Full Personalization</span></td>
+              </tr>
+              <tr>
+                <td>Spending Anomaly & Spike Alerts</td>
+                <td><span class="check-no">&mdash;</span></td>
+                <td><span class="check-yes pro">&#10003; Weekly Trend Alerts</span></td>
+              </tr>
+              <tr>
+                <td>Smart Receipt Scanner (On-Device OCR)</td>
+                <td><span class="check-no">&mdash;</span></td>
+                <td><span class="check-yes pro">&#10003; Google ML Kit (Beta)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 3 Verified Pricing Cards -->
+        <div class="pricing-cards-grid">
+          <!-- Monthly -->
+          <div class="pricing-card">
+            <div class="plan-header">
+              <span class="plan-name">Monthly</span>
+              <p class="plan-desc">Flexible, cancel anytime via Google Play</p>
+            </div>
+            <div class="plan-price">
+              <span class="currency">&#8377;</span>
+              <span class="amount">49</span>
+              <span class="period">/ month</span>
+            </div>
+            <ul class="plan-features">
+              <li>All Penny Pro features included</li>
+              <li>Cancel anytime in 1 tap</li>
+              <li>Instant activation</li>
+            </ul>
+            <a href="#download" class="btn btn-secondary btn-block">Get Monthly Pro</a>
+          </div>
+
+          <!-- Annual (Featured) -->
+          <div class="pricing-card featured">
+            <div class="featured-badge">MOST POPULAR &bull; SAVE 32%</div>
+            <div class="plan-header">
+              <span class="plan-name">Annual</span>
+              <p class="plan-desc">Includes 7-Day Free Trial &bull; Just &#8377;33/mo</p>
+            </div>
+            <div class="plan-price">
+              <span class="currency">&#8377;</span>
+              <span class="amount">399</span>
+              <span class="period">/ year</span>
+            </div>
+            <div class="trial-pill">
+              <svg viewBox="0 0 16 16" fill="currentColor">
+                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+              </svg>
+              <span>7-Day Free Trial &bull; &#8377;0 Charged Today</span>
+            </div>
+            <ul class="plan-features">
+              <li>Full access to all Pro features</li>
+              <li>Reminder sent on Day 6 before renewal</li>
+              <li>Cancel before Day 7 and pay nothing</li>
+            </ul>
+            <a href="#download" class="btn btn-primary btn-block">Start 7-Day Free Trial</a>
+          </div>
+
+          <!-- Lifetime -->
+          <div class="pricing-card">
+            <div class="lifetime-badge">BEST VALUE</div>
+            <div class="plan-header">
+              <span class="plan-name">Lifetime Pass</span>
+              <p class="plan-desc">Pay once, enjoy Penny Pro forever</p>
+            </div>
+            <div class="plan-price">
+              <span class="currency">&#8377;</span>
+              <span class="amount">899</span>
+              <span class="period">one-time</span>
+            </div>
+            <ul class="plan-features">
+              <li>No recurring subscriptions ever</li>
+              <li>All future Pro features included</li>
+              <li>Single one-off payment</li>
+            </ul>
+            <a href="#download" class="btn btn-secondary btn-block">Get Lifetime Pro</a>
+          </div>
+        </div>
+
+        <div class="pricing-guarantee">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span>All subscriptions are processed securely via Google Play Billing. No payment credentials ever touch our servers.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VERIFIABLE PRIVACY & SECURITY SECTION ===== -->
+    <section class="security-section" id="security">
+      <div class="container">
+        <div class="section-header">
+          <div class="pill-tag green">VERIFIABLE PRIVACY ARCHITECTURE</div>
+          <h2 class="section-title">Your Financial Life Belongs to You. Period.</h2>
+          <p class="section-sub">
+            We don't harvest your SMS inbox, we don't sell data to financial brokers, and we never hold your funds.
+          </p>
+        </div>
+
+        <div class="security-bento-grid">
+          <!-- Item 1: Transport -->
+          <div class="bento-card">
+            <div class="bento-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <h3 class="bento-title">HTTPS & TLS 1.3 Encryption</h3>
+            <p class="bento-desc">
+              All communications between the Flutter client and the NestJS backend are encrypted in transit using TLS 1.3 with cleartext traffic explicitly disabled.
+            </p>
+          </div>
+
+          <!-- Item 2: Hardware Keystore -->
+          <div class="bento-card">
+            <div class="bento-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+              </svg>
+            </div>
+            <h3 class="bento-title">Hardware-Backed Android Keystore</h3>
+            <p class="bento-desc">
+              Sensitive authentication tokens and local credentials are encrypted using hardware cryptography via FlutterSecureStorage on device.
+            </p>
+          </div>
+
+          <!-- Item 3: Zero Data Harvesting -->
+          <div class="bento-card">
+            <div class="bento-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+            </div>
+            <h3 class="bento-title">Zero SMS or Contact Scraping</h3>
+            <p class="bento-desc">
+              Unlike traditional expense trackers that read every personal SMS message and upload your phonebook, Penny asks for neither. We have zero interest in your personal messages.
+            </p>
+          </div>
+
+          <!-- Item 4: Direct Peer-to-Peer Payments -->
+          <div class="bento-card">
+            <div class="bento-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M16 8l-8 8m0-8l8 8"/>
+              </svg>
+            </div>
+            <h3 class="bento-title">Peer-to-Peer UPI (Zero Intermediary)</h3>
+            <p class="bento-desc">
+              Penny is not a payment processor and never holds user balances. Debts are settled directly peer-to-peer via official UPI deep-links inside Google Pay, PhonePe, or Paytm.
+            </p>
+          </div>
+
+          <!-- Item 5: ACID Storage & Erasure -->
+          <div class="bento-card full-width">
+            <div class="bento-card-flex">
+              <div class="bento-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                  <polyline points="17 21 17 13 7 13 7 21"/>
+                  <polyline points="7 3 7 8 15 8"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="bento-title">Supabase PostgreSQL ACID Ledger & Instant Account Erasure</h3>
+                <p class="bento-desc">
+                  All transactions and splits are stored with strict ACID relational consistency. Want to leave? You can permanently delete your entire account and all transaction records instantly—either directly inside app settings or via our public Data Safety web portal at <a href="public/docs/delete-account.html" class="inline-link">/docs/delete-account.html</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== COMPREHENSIVE FAQ SECTION ===== -->
+    <section class="faq-section" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <div class="pill-tag">TRANSPARENCY</div>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-sub">Clear answers to your questions about Penny, pricing, and privacy.</p>
+        </div>
+
+        <div class="faq-accordion-list">
+          <!-- FAQ 1 -->
+          <div class="faq-accordion-item">
+            <button class="faq-question-btn" aria-expanded="false">
+              <span>What is Penny and how does it compare to other expense managers?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer-panel">
+              <p>Penny is a high-performance, dark-mode Android app combining personal budgeting with group bill splitting. Unlike ad-heavy apps that demand full SMS access to scrape transactions, Penny is built on strict data privacy, zero ads, integer-precise math, and 1-tap direct UPI settlement deep-links.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-accordion-item">
+            <button class="faq-question-btn" aria-expanded="false">
+              <span>What features are included in Penny Free forever?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer-panel">
+              <p>Penny Free includes unlimited personal expense logging, unlimited shared groups, full bill splitting (equal, exact rupee amounts, percentage shares), 1-tap direct UPI settlements, monthly budget tracker with progress ring, category breakdown charts, biometric App Lock, export to CSV/JSON/PDF statements, and up to 3 bill reminders.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-accordion-item">
+            <button class="faq-question-btn" aria-expanded="false">
+              <span>How does 1-tap UPI settlement work? Does Penny hold my funds?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer-panel">
+              <p>No, Penny never touches your money. When you or a friend tap "Settle Up", Penny constructs a standard UPI payment URI (<code>upi://pay?pa=...&am=...</code>) and launches your installed payment app (Google Pay, PhonePe, Paytm, or BHIM) with the exact amount and beneficiary UPI ID pre-populated. You authorize the payment securely using your UPI PIN inside your bank's app.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-accordion-item">
+            <button class="faq-question-btn" aria-expanded="false">
+              <span>How does the 7-day Pro free trial work?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer-panel">
+              <p>When you select the Annual Plan (&#8377;399/yr), you get 7 days of full Pro access with &#8377;0 charged today. You'll receive a reminder notification on Day 6. You can cancel anytime before Day 7 inside your Google Play subscriptions and you will not be charged a single rupee.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="faq-accordion-item">
+            <button class="faq-question-btn" aria-expanded="false">
+              <span>Can I use Penny without an active internet connection?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer-panel">
+              <p>Yes! Penny is engineered with an offline-first architecture using local encrypted storage. You can log personal expenses on airplanes or in poor network areas. When your device reconnects to the internet, Penny automatically synchronizes your changes with the cloud ledger.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 6 -->
+          <div class="faq-accordion-item">
+            <button class="faq-question-btn" aria-expanded="false">
+              <span>Can I export my financial statements to Excel or Google Sheets?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer-panel">
+              <p>Yes. Penny lets you export comprehensive transaction histories in CSV, JSON, and PDF formats directly to your device, WhatsApp, email, or Google Drive in one tap. This feature is completely free for all users.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 7 -->
+          <div class="faq-accordion-item">
+            <button class="faq-question-btn" aria-expanded="false">
+              <span>How do I delete my account and all my data?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer-panel">
+              <p>You have full ownership of your data. You can delete your account and all associated transactions immediately via Settings &gt; Delete Account in the app, or through our public Data Safety web portal at <a href="public/docs/delete-account.html" class="inline-link">/docs/delete-account.html</a>. Soft deletion immediately revokes all authentication tokens and active sessions.</p>
+            </div>
+          </div>
+
+          <!-- FAQ 8 -->
+          <div class="faq-accordion-item">
+            <button class="faq-question-btn" aria-expanded="false">
+              <span>How do I install the standalone APK on Android?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-answer-panel">
+              <p>Tap "Download APK" on this page. When prompted in your browser, tap Download. Once downloaded, open the APK from your phone notifications or Downloads folder. If Android displays "Install unknown apps", toggle "Allow from this source" in settings, then tap Install.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FINAL DOWNLOAD CTA SECTION ===== -->
+    <section class="download-section" id="download">
+      <div class="container">
+        <div class="download-card">
+          <div class="download-card-glow"></div>
+          <div class="download-card-content">
+            <div class="pill-tag purple">READY TO UPGRADE YOUR FINANCES?</div>
+            <h2 class="download-title">Get Penny Today</h2>
+            <p class="download-subtitle">
+              Join the new standard of clean, ad-free personal finance. Available as a verified direct Android installer and rolling out on Google Play.
+            </p>
+
+            <div class="download-buttons-cluster">
+              <!-- Google Play Button -->
+              <a href="#" class="btn btn-primary btn-xl" id="play-store-cta" onclick="alert('Penny will be available on the Google Play Store soon!'); return false;">
+                <svg class="btn-icon-xl" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3 20.61V3.39c0-.89.97-1.45 1.74-.99l14.54 8.61c.74.44.74 1.54 0 1.98L4.74 21.6c-.77.46-1.74-.1-1.74-.99z"/>
+                </svg>
+                <div class="btn-stacked">
+                  <span class="btn-subtext">AVAILABLE SOON ON</span>
+                  <span class="btn-maintext">Google Play</span>
+                </div>
+              </a>
+            </div>
+
+            <!-- APK Integrity Details -->
+            <div class="apk-spec-strip">
+              <div class="spec-cell">
+                <span class="spec-label">File Size:</span>
+                <span class="spec-val">87.7 MB</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-label">Target OS:</span>
+                <span class="spec-val">Android 7.0+ (API 24 to 35)</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-label">Architecture:</span>
+                <span class="spec-val">ARM64 Native AOT</span>
+              </div>
+              <div class="spec-cell">
+                <span class="spec-label">Integrity:</span>
+                <span class="spec-val hash">SHA-256 Verified</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <div class="nav-logo-icon small">
-          <img src="penny_icon.jpg" alt="Penny" class="nav-logo-img">
+    <div class="container footer-container">
+      <div class="footer-top-row">
+        <div class="footer-brand-col">
+          <div class="brand-logo footer-logo">
+            <div class="brand-icon-box">
+              <img src="public/images/penny_ribbon_logo.png" alt="Penny Logo" class="brand-logo-img">
+            </div>
+            <span class="brand-name">Penny</span>
+          </div>
+          <p class="footer-mission">
+            The privacy-forward personal expense manager and collaborative group bill splitter. Built with Flutter and NestJS.
+          </p>
         </div>
-        <span class="brand-text">Penny</span>
-        <span class="brand-tagline">&bull; Smart Expense Tracker</span>
+
+        <div class="footer-links-grid">
+          <div class="footer-col">
+            <h5 class="footer-heading">Product</h5>
+            <ul class="footer-link-list">
+              <li><a href="#how-it-works">How It Works</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#simplification">Debt Simplification</a></li>
+              <li><a href="#walkthrough">Screen Walkthrough</a></li>
+              <li><a href="#pro">Penny Pro</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h5 class="footer-heading">Legal & Privacy</h5>
+            <ul class="footer-link-list">
+              <li><a href="public/docs/privacy-policy.html">Privacy Policy</a></li>
+              <li><a href="public/docs/terms.html">Terms of Service</a></li>
+              <li><a href="public/docs/delete-account.html">Delete Account Portal</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h5 class="footer-heading">Developer</h5>
+            <ul class="footer-link-list">
+              <li><a href="mailto:support@pennyapp.dev">support@pennyapp.dev</a></li>
+              <li><a href="https://github.com/Karthixn/Penny" target="_blank" rel="noopener">GitHub Repository</a></li>
+              <li><a href="#download">Latest Release APK</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
-      
-      <div class="footer-links">
-        <a href="public/docs/privacy-policy.html">Privacy Policy</a>
-        <a href="public/docs/terms.html">Terms of Service</a>
-        <a href="public/docs/delete-account.html">Account Deletion</a>
-        <a href="mailto:support@pennyapp.in">Support</a>
+
+      <div class="footer-bottom-row">
+        <p class="footer-copyright">&copy; 2026 Penny. All rights reserved. Crafted for speed and security.</p>
+        <div class="footer-security-note">
+          <svg viewBox="0 0 16 16" fill="currentColor">
+            <path fill-rule="evenodd" d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.464 9.99 1.565 2.044 3.513 3.018 4.095 3.275a.5.5 0 0 0 .4 0c.582-.257 2.53-.1.231 4.095-3.275 1.677-2.195 3.06-5.513 2.464-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0z"/>
+          </svg>
+          <span>End-to-End Transport Encrypted &bull; OWASP Mobile Hardened</span>
+        </div>
       </div>
-      
-      <p class="footer-copy">&copy; 2026 Penny App. All rights reserved. Coming soon to Google Play.</p>
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- GSAP & Lenis Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+
+  <!-- Application Script -->
   <script src="main.js"></script>
 </body>
 </html>

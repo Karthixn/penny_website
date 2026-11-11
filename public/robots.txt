@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /reel.html
 
-Sitemap: https://penny-37mv.onrender.com/sitemap.xml
+Sitemap: https://pennyhq.netlify.app/sitemap.xml
